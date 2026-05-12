@@ -1,0 +1,393 @@
+/* ========================= */
+/* NAVBAR */
+/* ========================= */
+
+.navbar {
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  position: static;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.navbar__container {
+  width: 100%;
+  padding: 0 clamp(15px, 5vw, 60px);
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+
+  height: 80px;
+}
+
+/* ========================= */
+/* LEFT */
+/* ========================= */
+
+.navbar__left {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo */
+
+.navbar__logo img {
+  height: 80px;
+  display: block;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.navbar__logo img:hover {
+  transform: scale(1.1) translateY(-2px);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+/* ========================= */
+/* CENTER */
+/* ========================= */
+
+.navbar__menu {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  gap: 50px;
+
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.navbar__menu li a {
+  text-decoration: none;
+  color: #000000;
+  font-weight: 500;
+  font-size: 15px;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: inline-block; /* importante pro scale funcionar bem */
+}
+
+.navbar__menu li a:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+/* ========================= */
+/* RIGHT */
+/* ========================= */
+
+.navbar__right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ========================= */
+/* PROFILE */
+/* ========================= */
+
+.navbar__profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 6px 10px;
+
+  border-radius: 20px;
+  background: #f5f5f5;
+
+  transition: transform 0.3s ease, background 0.3s ease;
+
+  text-decoration: none;
+}
+
+.navbar__profile:hover {
+  background: #eaeaea;
+  transform: scale(1.05);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+.navbar__profile svg {
+  width: 20px;
+  height: 20px;
+  fill: #333;
+}
+
+.navbar__user {
+  font-size: 14px;
+  color: #333;
+  white-space: nowrap;
+}
+
+/* ========================= */
+/* HAMBURGER */
+/* ========================= */
+
+.navbar__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar__toggle span {
+  width: 25px;
+  height: 3px;
+  background: #333;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+/* ========================= */
+/* ANIMAÇÃO */
+/* ========================= */
+
+.navbar__toggle.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.navbar__toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar__toggle.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ========================= */
+/* LOGOUT */
+/* ========================= */
+
+.navbar__logout {
+  width: 20px;
+  height: 20px;
+  color: #333;
+  cursor: pointer;
+
+  transition: transform 0.3s ease, filter 0.3s ease, color 0.3s ease;
+}
+
+.navbar__logout:hover {
+  transform: scale(1.15);
+  color: #e53935; /* vermelho leve pra indicar sair */
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+/* ========================= */
+/* MODAL OVERLAY */
+/* ========================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* ========================= */
+/* MODAL */
+/* ========================= */
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px 28px 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  animation: modal-in 0.25s ease;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin: 0 0 24px;
+}
+
+/* ========================= */
+/* MODAL ACTIONS */
+/* ========================= */
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.modal-actions button {
+  flex: 1;
+  max-width: 140px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.3s ease, filter 0.3s ease, background 0.3s ease;
+}
+
+/* Cancelar */
+.modal-actions button:first-child {
+  background: #f5f5f5;
+  color: #333;
+}
+
+.modal-actions button:first-child:hover {
+  background: #eaeaea;
+  transform: scale(1.05);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
+}
+
+/* Confirmar */
+.modal-actions button:last-child {
+  background: #e53935;
+  color: #fff;
+}
+
+.modal-actions button:last-child:hover {
+  background: #c62828;
+  transform: scale(1.05);
+  filter: drop-shadow(0 4px 10px rgba(229, 57, 53, 0.35));
+}
+
+/* ========================= */
+/* RESPONSIVO */
+/* ========================= */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .modal {
+    padding: 28px 22px 20px;
+    max-width: 340px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .modal {
+    padding: 24px 18px 18px;
+    border-radius: 12px;
+    max-width: 100%;
+  }
+
+  .modal p {
+    font-size: 15px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .modal-actions button {
+    max-width: 100%;
+  }
+}
+
+
+/* ========================= */
+/* RESPONSIVO */
+/* ========================= */
+
+/* Notebook */
+@media (max-width: 1024px) {
+
+  .navbar__menu {
+    gap: 30px;
+  }
+
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+
+  .navbar__container {
+    grid-template-columns: auto auto;
+  }
+
+  .navbar__toggle {
+    display: flex;
+  }
+
+  .navbar__menu {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+
+    background: white;
+
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    padding: 20px 0;
+
+    transform: translateY(-150%);
+    transition: 0.3s;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+
+  .navbar__menu.open {
+    transform: translateY(0);
+  }
+
+  .navbar__user {
+    display: none;
+  }
+
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+
+  .navbar__logo img {
+    height: 60px;
+  }
+
+  .navbar__profile {
+    width: 32px;
+    height: 32px;
+
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+
+  .navbar__toggle span {
+    width: 22px;
+  }
+
+  .navbar__user {
+    display: none;
+  }
+
+}

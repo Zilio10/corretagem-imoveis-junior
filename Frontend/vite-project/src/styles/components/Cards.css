@@ -1,0 +1,70 @@
+/* ========================= */
+/* CARDS */
+/* ========================= */
+
+.cards-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 24px 60px;
+}
+
+.cards-heading {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a2332;
+    margin: 0 0 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cards-count {
+    background: #e8f0f8;
+    color: rgba(37, 38, 110, 0.699);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    min-height: 600px;
+    align-content: start;
+}
+
+.cards-empty {
+    text-align: center;
+    padding: 80px 24px;
+    color: #8a95a3;
+}
+
+.cards-empty-icon {
+    font-size: 52px;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.cards-empty p {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* ========================= */
+/* RESPONSIVO */
+/* ========================= */
+
+@media (max-width: 600px) {
+    .cards-section {
+        padding: 20px 16px 40px;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        min-height: 400px;
+    }
+}

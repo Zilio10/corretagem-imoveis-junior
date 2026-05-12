@@ -1,0 +1,109 @@
+/* ========================= */
+/* PAGINATION */
+/* ========================= */
+
+.pagination-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* garante centralização vertical */
+
+    gap: 8px;
+
+    width: 100%;
+}
+
+.pagination-list {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* ⬅️ centraliza horizontalmente */
+
+    gap: 4px;
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pagination-list li button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background: #f5f5f5;
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+
+    transition: transform 0.3s ease, background 0.3s ease, filter 0.3s ease, border 0.3s ease;
+}
+
+.pagination-list li button:hover:not(:disabled) {
+    background: #eaeaea;
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
+}
+
+.pagination-list li button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+    filter: none;
+}
+
+.pagination-list li button.active {
+    background: rgba(37, 38, 110, 0.699);
+    border-color: transparent;
+    color: #fff;
+    font-weight: 600;
+    cursor: default;
+    transform: none;
+    filter: drop-shadow(0 4px 10px rgba(37, 38, 110, 0.3));
+}
+
+/* ========================= */
+/* RESPONSIVO */
+/* ========================= */
+
+@media (max-width: 768px) {
+    .pagination-container {
+        padding: 20px 0 50px; /* espaçamento menor, mas ainda confortável */
+    }
+
+    .pagination-list {
+        gap: 3px;
+    }
+
+    .pagination-list li button {
+        min-width: 32px;
+        height: 32px;
+        font-size: 13px;
+        padding: 0 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pagination-container {
+        padding: 16px 0 40px;
+    }
+
+    .pagination-list {
+        gap: 3px;
+    }
+
+    .pagination-list li button {
+        min-width: 28px;
+        height: 28px;
+        font-size: 12px;
+        padding: 0 6px;
+        border-radius: 8px;
+    }
+}

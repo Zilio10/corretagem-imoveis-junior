@@ -1,0 +1,19 @@
+# Variáveis de ambiente 
+.env
+*.env
+
+# Dependências do Node 
+node_modules/
+Frontend/vite-project/node_modules/
+
+# Arquivos de build gerados
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,52 @@
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+/* Estrutura da aplicação */
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Conteúdo principal */
+main {
+  flex: 1;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.loading-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.spinner {
+  width: 70px;
+  height: 70px;
+  border: 7px solid #e5e7eb; /* cinza claro */
+  border-top: 5px solid rgba(37, 38, 110, 0.699); /* azul */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* animação */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

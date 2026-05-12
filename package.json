@@ -1,0 +1,31 @@
+{
+  "name": "corretagem-imoveis-junior",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "backend": "nodemon Backend/server.js",
+    "frontend": "npm --prefix Frontend/vite-project run dev",
+    "start": "node Backend/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.20.0",
+    "react-input-mask": "^2.0.4",
+    "sonner": "^2.0.7",
+    "sweetalert2": "^11.26.24"
+  }
+}
