@@ -115,6 +115,7 @@ export default function SearchBar() {
                             <option value="">Todas</option>
                             <option value="Venda">Venda</option>
                             <option value="Aluguel">Aluguel</option>
+                            <option value="Permuta">Permuta</option>
                         </select>
                     </div>
 

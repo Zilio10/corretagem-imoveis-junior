@@ -1,0 +1,386 @@
+/* ===== IMOVEL ADD PAGE ===== */
+.imovel-add-page {
+    min-height: calc(100vh - 140px);
+    background: #f4f6fb;
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imovel-add-page .imovel-add-wrapper {
+    width: 100%;
+    max-width: 960px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ===== PAGE HEADER ===== */
+.imovel-add-page .imovel-page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+}
+
+.imovel-add-page .imovel-page-header h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: rgba(37, 38, 110, 0.85);
+    margin: 0;
+}
+
+.imovel-add-page .imovel-page-header p {
+    font-size: 14px;
+    color: #8a95a3;
+    margin: 0;
+}
+
+/* ===== CARD ===== */
+.imovel-add-page .imovel-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.imovel-add-page .imovel-card-title {
+    font-size: 11px;
+    font-weight: 800;
+    color: rgba(37, 38, 110, 0.7);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f0f2f5;
+    margin: 0;
+}
+
+/* ===== GRID LAYOUTS ===== */
+.imovel-add-page .imovel-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.imovel-add-page .imovel-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+}
+
+.imovel-add-page .imovel-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.imovel-add-page .imovel-grid-cep {
+    display: grid;
+    grid-template-columns: 150px 1fr 1fr 110px;
+    gap: 16px;
+}
+
+/* ===== FIELD ===== */
+.imovel-add-page .imovel-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.imovel-add-page .imovel-field label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #8a95a3;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.imovel-add-page .imovel-field input,
+.imovel-add-page .imovel-field select,
+.imovel-add-page .imovel-field textarea {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid #eaecf0;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #1a2332;
+    background: #f8f9fb;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.imovel-add-page .imovel-field input::placeholder,
+.imovel-add-page .imovel-field textarea::placeholder {
+    color: #b0bac5;
+}
+
+.imovel-add-page .imovel-field input:focus,
+.imovel-add-page .imovel-field select:focus,
+.imovel-add-page .imovel-field textarea:focus {
+    border-color: rgba(37, 38, 110, 0.45);
+    box-shadow: 0 0 0 3px rgba(37, 38, 110, 0.08);
+    background: #ffffff;
+}
+
+.imovel-add-page .imovel-field textarea {
+    resize: vertical;
+    min-height: 110px;
+    line-height: 1.6;
+}
+
+.imovel-add-page .imovel-field select {
+    cursor: pointer;
+}
+
+/* ===== ÁREA ===== */
+.imovel-add-page .imovel-area-group {
+    display: flex;
+    gap: 8px;
+}
+
+.imovel-add-page .imovel-area-group input {
+    flex: 1;
+}
+
+.imovel-add-page .imovel-area-group select {
+    width: 88px;
+    flex-shrink: 0;
+    padding: 13px 10px;
+}
+
+/* ===== UPLOAD ===== */
+.imovel-add-page .imovel-upload-dropzone {
+    border: 2px dashed #d1d5db;
+    border-radius: 12px;
+    background: #f8f9fb;
+    padding: 36px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    text-align: center;
+}
+
+.imovel-add-page .imovel-upload-dropzone:hover,
+.imovel-add-page .imovel-upload-dropzone {
+    border-color: rgba(37, 38, 110, 0.5);
+    background: rgba(37, 38, 110, 0.03);
+}
+
+.imovel-add-page .imovel-upload-dropzone input[type="file"] {
+    display: none;
+}
+
+.imovel-add-page .imovel-upload-icon {
+    font-size: 32px;
+    line-height: 1;
+}
+
+.imovel-add-page .imovel-upload-dropzone p {
+    margin: 0;
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+.imovel-add-page .imovel-upload-dropzone p strong {
+    color: rgba(37, 38, 110, 0.8);
+    font-weight: 700;
+}
+
+.imovel-add-page .imovel-upload-dropzone span {
+    font-size: 12px;
+    color: #b0bac5;
+}
+
+/* Preview */
+.imovel-add-page .imovel-upload-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.imovel-add-page .imovel-preview-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    border: 1px solid #e5e7eb;
+    background: #f0f2f5;
+}
+
+.imovel-add-page .imovel-preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.imovel-add-page .imovel-preview-remove {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.imovel-add-page .imovel-preview-remove:hover {
+    background: rgba(192, 57, 43, 0.85);
+}
+
+/* ===== BOTÕES ===== */
+.imovel-add-page .imovel-submit-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.imovel-add-page .imovel-btn-cancelar {
+    padding: 14px 28px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background: #ff0404ab;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    font-family: inherit;
+}
+
+.imovel-add-page .imovel-btn-cancelar:hover {
+    background: #ff0000;
+    border-color: #d1d5db;
+}
+
+.imovel-add-page .imovel-btn-cadastrar {
+    padding: 14px 36px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(37, 38, 110, 0.699);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+    font-family: inherit;
+}
+
+.imovel-add-page .imovel-btn-cadastrar:hover {
+    background: rgb(69, 71, 165);
+    transform: scale(1.02);
+}
+
+.imovel-add-page .imovel-btn-cadastrar:active {
+    transform: scale(0.98);
+}
+
+/* ===== RESPONSIVO ===== */
+
+@media (max-width: 768px) {
+    .imovel-add-page {
+        padding: 1.5rem 1rem;
+    }
+
+    .imovel-add-page .imovel-card {
+        padding: 22px 20px;
+    }
+
+    .imovel-add-page .imovel-grid-3 {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .imovel-add-page .imovel-grid-4 {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .imovel-add-page .imovel-grid-cep {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .imovel-add-page .imovel-submit-row {
+        flex-direction: column;
+    }
+
+    .imovel-add-page .imovel-btn-cancelar,
+    .imovel-add-page .imovel-btn-cadastrar {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .imovel-add-page {
+        padding: 1rem 0;
+        background: #ffffff;
+    }
+
+    .imovel-add-page .imovel-add-wrapper {
+        gap: 0;
+    }
+
+    .imovel-add-page .imovel-page-header {
+        padding: 1.2rem 1.2rem 0;
+    }
+
+    .imovel-add-page .imovel-card {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        box-shadow: none;
+        padding: 20px 16px;
+        margin-top: 1rem;
+    }
+
+    .imovel-add-page .imovel-grid-2,
+    .imovel-add-page .imovel-grid-3,
+    .imovel-add-page .imovel-grid-4,
+    .imovel-add-page .imovel-grid-cep {
+        grid-template-columns: 1fr;
+    }
+
+    .imovel-add-page .imovel-area-group {
+        flex-direction: row;
+    }
+
+    .imovel-add-page .imovel-area-group select {
+        width: 100px;
+    }
+
+    .imovel-add-page .imovel-upload-preview {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+
+    .imovel-add-page .imovel-submit-row {
+        flex-direction: column;
+    }
+
+    .imovel-add-page .imovel-btn-cancelar,
+    .imovel-add-page .imovel-btn-cadastrar {
+        width: 100%;
+        padding: 16px;
+        font-size: 16px;
+    }
+}
