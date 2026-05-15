@@ -85,6 +85,18 @@
     gap: 16px;
 }
 
+.imovel-add-page .imovel-address-field {
+    grid-column: 1 / -1;
+}
+
+.imovel-add-page .imovel-street-field {
+    grid-column: span 2;
+}
+
+.imovel-add-page .imovel-number-field {
+    grid-column: span 1;
+}
+
 /* ===== FIELD ===== */
 .imovel-add-page .imovel-field {
     display: flex;
@@ -111,7 +123,10 @@
     color: #1a2332;
     background: #f8f9fb;
     outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
     box-sizing: border-box;
     font-family: inherit;
 }
@@ -203,7 +218,7 @@
     color: #b0bac5;
 }
 
-/* Preview */
+/* ===== PREVIEW ===== */
 .imovel-add-page .imovel-upload-preview {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -300,6 +315,7 @@
 /* ===== RESPONSIVO ===== */
 
 @media (max-width: 768px) {
+
     .imovel-add-page {
         padding: 1.5rem 1rem;
     }
@@ -320,6 +336,13 @@
         grid-template-columns: 1fr 1fr;
     }
 
+    /* CORREÇÃO LOCALIZAÇÃO */
+    .imovel-add-page .imovel-street-field,
+    .imovel-add-page .imovel-number-field,
+    .imovel-add-page .imovel-address-field {
+        grid-column: 1 / -1;
+    }
+
     .imovel-add-page .imovel-submit-row {
         flex-direction: column;
     }
@@ -332,6 +355,7 @@
 }
 
 @media (max-width: 480px) {
+
     .imovel-add-page {
         padding: 1rem 0;
         background: #ffffff;
@@ -359,6 +383,13 @@
     .imovel-add-page .imovel-grid-4,
     .imovel-add-page .imovel-grid-cep {
         grid-template-columns: 1fr;
+    }
+
+    /* CORREÇÃO LOCALIZAÇÃO */
+    .imovel-add-page .imovel-street-field,
+    .imovel-add-page .imovel-number-field,
+    .imovel-add-page .imovel-address-field {
+        grid-column: 1 / -1;
     }
 
     .imovel-add-page .imovel-area-group {

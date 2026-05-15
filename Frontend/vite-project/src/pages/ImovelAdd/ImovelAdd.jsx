@@ -1,3 +1,4 @@
+import { FaTimes } from 'react-icons/fa'
 import { useEffect, useState } from "react"
 import { isAuthenticated, getToken } from "../../utils/auth"
 import { getaddressByCep } from "../../services/cepService"
@@ -7,7 +8,32 @@ import '../../styles/pages/ImovelAdd.css'
 export default function ImovelAdd() {
 
     const [userToken, setUserToken] = useState(null)
-    const [imagens, setImagens] = useState([])
+
+    const [imagens, setImagens] = useState([]) // Imagens
+    const [title, setTitle] = useState("") // Título
+    const [description, setDescription] = useState("") // Descrição
+    const [price, setPrice] = useState("") // Preço
+    const [type, setType] = useState("") // Tipo (Casa, Apartamento, Terreno, Fazenda)
+    const [finality, setFinality] = useState("") // Finalidade (Venda, Aluguel, Permuta)
+    const [stage, setStage] = useState("")  // Estágio (Concluído, Em construção, Na planta)
+    const [status, setStatus] = useState("") // Status (Disponível, Vendido, Alugado)
+    const [cep, setCep] = useState("") // CEP
+    const [city, setCity] = useState("") // Cidade
+    const [neighborhood, setNeighborhood] = useState("") // Bairro
+    const [street, setStreet] = useState("") // Rua
+    const [number, setNumber] = useState("") // Número
+    const [adress, setAddress] = useState("") // Endereço completo
+    const [area, setArea] = useState("") // Área
+    const [areaUnit, setAreaUnit] = useState("m²") // Unidade da área (m², he, alq)
+    const [bedrooms, setBedrooms] = useState(0) // Quartos
+    const [suites, setSuites] = useState(0) // Suítes
+    const [bathrooms, setBathrooms] = useState(0) // Banheiros
+    const [parkingSpaces, setParkingSpaces] = useState(0) // Vagas de garagem
+
+    const [imovelData, setImovelData] = useState({}) // Dados do imóvel a serem enviados para a API
+
+
+
 
     const handleImagemAdd = (e) => {
         const files = Array.from(e.target.files)
@@ -45,11 +71,76 @@ export default function ImovelAdd() {
         setImagens(prev => [...prev, ...novas])
     }
 
+    const handleCep = async (cep) => {
+        try {
+            const cepLimpo = cep.replace("-", "")
+
+            const res = await getaddressByCep(cepLimpo)
+
+            if (res.data.erro) {
+                return
+            }
+
+            setCity(res.data.localidade)
+            setNeighborhood(res.data.bairro)
+            setStreet(res.data.logradouro)
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const handlePrice = (value) => {
+        value = value.replace(/\D/g, "")
+        value = (Number(value) / 100).toFixed(2)
+        value = value.replace(".", ",")
+        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        setPrice(value)
+    }
+
+    const buildAdress = () => {
+        if (city && neighborhood && street) {
+            if (number) {
+                setAddress(`${street}, ${number} - ${neighborhood}, ${city}`)
+            } else {
+                setAddress(`${street} - ${neighborhood}, ${city} -> (Número não informado) `)
+            }
+        }
+    }
+
+    const handleSubmit = () => {
+        setImovelData({
+            titulo: title,
+            descricao: description,
+            preco: price,
+            tipo: type,
+            finalidade: finality,
+            estagio: stage,
+            status: status,
+            cep: cep,
+            cidade: city,
+            bairro: neighborhood,
+            endereco: adress,
+            area: `${area} ${areaUnit}`,
+            qtdQuartos: Number(bedrooms),
+            qtdSuites: Number(suites),
+            qtdBanheiros: Number(bathrooms),
+            qtdVagas: Number(parkingSpaces),
+            dataCriacao: new Date().toISOString().slice(0, 19).replace("T", " ") //Formata a data no formato "YYYY-MM-DD HH:MM:SS" para compatibilidade com o MySQL
+        })
+
+        console.log(imovelData)
+    }
+
     useEffect(() => {
         if (!isAuthenticated()) return
         const token = getToken()
         setUserToken(token)
     }, [])
+
+    useEffect(() => {
+        buildAdress()
+    }, [city, neighborhood, street, number])
 
     return (
         <div className="imovel-add-page">
@@ -57,7 +148,7 @@ export default function ImovelAdd() {
 
                 {/* HEADER */}
                 <div className="imovel-page-header">
-                    <h2>Adicionar Imóvel</h2>
+                    <h2>Anunciar Imóvel</h2>
                     <p>Preencha as informações do novo imóvel</p>
                 </div>
 
@@ -67,22 +158,22 @@ export default function ImovelAdd() {
 
                     <div className="imovel-field">
                         <label>Título</label>
-                        <input type="text" placeholder="Ex: Casa com quintal em condomínio fechado" required/>
+                        <input type="text" placeholder="Ex: Casa com quintal em condomínio fechado" required value={title} onChange={(e) => { setTitle(e.target.value) }} />
                     </div>
 
                     <div className="imovel-field">
                         <label>Descrição</label>
-                        <textarea placeholder="Descreva o imóvel com detalhes relevantes..." />
+                        <textarea placeholder="Descreva o imóvel com detalhes relevantes..." value={description} onChange={(e) => { setDescription(e.target.value) }} />
                     </div>
 
                     <div className="imovel-grid-2">
                         <div className="imovel-field">
                             <label>Preço (R$)</label>
-                            <input type="number" step="0.01" min="0" placeholder="0,00" required/>
+                            <input type="text" step="0.01" min="0" placeholder="0,00" required value={price} onChange={(e) => { handlePrice(e.target.value) }} />
                         </div>
                         <div className="imovel-field">
                             <label>Tipo</label>
-                            <select>
+                            <select value={type} onChange={(e) => { setType(e.target.value) }}>
                                 <option value="">Selecione</option>
                                 <option value="Casa">Casa</option>
                                 <option value="Apartamento">Apartamento</option>
@@ -95,7 +186,7 @@ export default function ImovelAdd() {
                     <div className="imovel-grid-3">
                         <div className="imovel-field">
                             <label>Finalidade</label>
-                            <select>
+                            <select value={finality} onChange={(e) => { setFinality(e.target.value) }}>
                                 <option value="">Selecione</option>
                                 <option value="Venda">Venda</option>
                                 <option value="Aluguel">Aluguel</option>
@@ -104,7 +195,7 @@ export default function ImovelAdd() {
                         </div>
                         <div className="imovel-field">
                             <label>Estágio</label>
-                            <select>
+                            <select value={stage} onChange={(e) => { setStage(e.target.value) }}>
                                 <option value="">Selecione</option>
                                 <option value="Concluído">Pronto</option>
                                 <option value="Em construção">Em construção</option>
@@ -113,7 +204,7 @@ export default function ImovelAdd() {
                         </div>
                         <div className="imovel-field">
                             <label>Status</label>
-                            <select>
+                            <select value={status} onChange={(e) => { setStatus(e.target.value) }}>
                                 <option value="">Selecione</option>
                                 <option value="Disponível">Disponível</option>
                                 <option value="Vendido">Vendido</option>
@@ -130,19 +221,34 @@ export default function ImovelAdd() {
                     <div className="imovel-grid-cep">
                         <div className="imovel-field">
                             <label>CEP</label>
-                            <input type="text" placeholder="00000-000" maxLength={9} />
+                            <input type="text" placeholder="00000-000" maxLength={9} value={cep} onChange={(e) => {
+                                let value = e.target.value
+                                value = value.replace(/\D/g, "")
+                                value = value.slice(0, 8)
+                                if (value.length > 5) { value = value.slice(0, 5) + "-" + value.slice(5) }
+                                setCep(value)
+                                if (value.length === 9) { handleCep(value) }
+                            }} />
                         </div>
                         <div className="imovel-field">
                             <label>Cidade</label>
-                            <input type="text" placeholder="São Paulo" required />
+                            <input type="text" placeholder="Ex: São Paulo" required value={city} onChange={(e) => { setCity(e.target.value) }} />
                         </div>
                         <div className="imovel-field">
                             <label>Bairro</label>
-                            <input type="text" placeholder="Centro" required />
+                            <input type="text" placeholder="Ex: Centro" required value={neighborhood} onChange={(e) => { setNeighborhood(e.target.value) }} />
                         </div>
-                        <div className="imovel-field">
+                        <div className="imovel-field imovel-street-field">
+                            <label>Logradouro</label>
+                            <input type="text" placeholder="Ex: Rua das Flores" required value={street} onChange={(e) => { setStreet(e.target.value) }} />
+                        </div>
+                        <div className="imovel-field imovel-number-field">
                             <label>Número</label>
-                            <input type="number" min="0" placeholder="Ex: 123" />
+                            <input type="number" min="0" placeholder="Ex: 123" value={number} onChange={(e) => { setNumber(e.target.value) }} />
+                        </div>
+                        <div className="imovel-field imovel-address-field">
+                            <label>Endereço completo</label>
+                            <input type="text" placeholder="Ex: Rua das Flores, 123 - Centro, São Paulo - SP" value={adress} onChange={(e) => { setAddress(e.target.value) }} />
                         </div>
                     </div>
                 </div>
@@ -154,8 +260,8 @@ export default function ImovelAdd() {
                     <div className="imovel-field">
                         <label>Área</label>
                         <div className="imovel-area-group">
-                            <input type="number" min="0" placeholder="Ex: 250" />
-                            <select>
+                            <input type="number" min="0" placeholder="Ex: 250" required value={area} onChange={(e) => { setArea(e.target.value) }} />
+                            <select required value={areaUnit} onChange={(e) => { setAreaUnit(e.target.value) }}>
                                 <option value="m2" title="Metro quadrado">m²</option>
                                 <option value="he" title="Hectare">he</option>
                                 <option value="alq" title="Alqueire">alq</option>
@@ -166,19 +272,19 @@ export default function ImovelAdd() {
                     <div className="imovel-grid-4">
                         <div className="imovel-field">
                             <label>Quartos</label>
-                            <input type="number" min="0" placeholder="0" required />
+                            <input type="number" min="0" placeholder="0" required value={bedrooms} onChange={(e) => { setBedrooms(e.target.value) }} />
                         </div>
                         <div className="imovel-field">
                             <label>Suítes</label>
-                            <input type="number" min="0" placeholder="0" required />
+                            <input type="number" min="0" placeholder="0" required value={suites} onChange={(e) => { setSuites(e.target.value) }} />
                         </div>
                         <div className="imovel-field">
                             <label>Banheiros</label>
-                            <input type="number" min="0" placeholder="0" required />
+                            <input type="number" min="0" placeholder="0" required value={bathrooms} onChange={(e) => { setBathrooms(e.target.value) }} />
                         </div>
                         <div className="imovel-field">
                             <label>Vagas</label>
-                            <input type="number" min="0" placeholder="0" required />
+                            <input type="number" min="0" placeholder="0" required value={parkingSpaces} onChange={(e) => { setParkingSpaces(e.target.value) }} />
                         </div>
                     </div>
                 </div>
@@ -216,7 +322,7 @@ export default function ImovelAdd() {
                                         onClick={() => handleImagemRemover(index)}
                                         title="Remover imagem"
                                     >
-                                        ×
+                                        <FaTimes />
                                     </button>
                                 </div>
                             ))}
@@ -226,8 +332,14 @@ export default function ImovelAdd() {
 
                 {/* BOTÕES */}
                 <div className="imovel-submit-row">
-                    <button className="imovel-btn-cancelar">Cancelar</button>
-                    <button className="imovel-btn-cadastrar">Cadastrar Imóvel</button>
+                    <button className="imovel-btn-cancelar" onClick={(e) => {
+                        e.preventDefault()
+                        window.location.href = "/"
+                    }}>Cancelar</button>
+                    <button className="imovel-btn-cadastrar" onClick={(e) => {
+                        e.preventDefault()
+                        handleSubmit()
+                    }}>Cadastrar Imóvel</button>
                 </div>
 
             </div>

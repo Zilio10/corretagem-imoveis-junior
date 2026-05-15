@@ -48,7 +48,7 @@ export default function Navbar() {
   function adminNavbar(isLogged, nivel, links) {
     if (isLogged && nivel === 'admin') {
       links.push({
-        label: "Adicionar Imóvel",
+        label: "Anunciar Imóvel",
         href: "/adicionar-imovel"
       })
     }

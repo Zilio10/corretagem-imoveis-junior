@@ -1,16 +1,26 @@
 const Imovel = require('../Models/Imovel')
 const ImovelRepository = require('../Repositories/ImovelRepository')
 
-class ImovelController{
+class ImovelController {
 
     async Create(req, res) {
         try {
+            // Converte "1.234,56" => 1234.56
+            req.body.preco = Number(
+                req.body.preco
+                    .replace(/\./g, "") // remove pontos
+                    .replace(",", ".")  // troca vírgula por ponto
+            )
+
             const imovelObj = new Imovel(req.body)
+
             const idImovel = await ImovelRepository.Create(imovelObj)
 
-            res.status(201).json({ Sucesso: true, Id_Imovel: idImovel }) // Status 201 -> CREATED
+            res.status(201).json({ Sucesso: true,Id_Imovel: idImovel })
+
         } catch (err) {
-            res.status(500).json({ Sucesso: false, Erro: err.message })
+
+            res.status(500).json({ Sucesso: false,Erro: err.message })
 
         }
     }
@@ -47,16 +57,16 @@ class ImovelController{
     }
 
     async Update(req, res) {
-        try { 
+        try {
             const id = parseInt(req.params.id)
             const imovelObj = new Imovel(req.body)
             const affectedRows = await ImovelRepository.Update(id, imovelObj)
 
             if (affectedRows === 0) return res.status(404).json({ Sucesso: false, Mensagem: 'Imóvel não encontrado.' })
-            
+
             res.status(200).json({ Sucesso: true, Mensagem: 'Imóvel atualizado com sucesso.' })
         } catch (err) {
-            res.status(500).json({ Sucesso: false, Erro: err.message })    
+            res.status(500).json({ Sucesso: false, Erro: err.message })
         }
     }
 
@@ -66,10 +76,10 @@ class ImovelController{
             const affectedRows = await ImovelRepository.Delete(id)
 
             if (affectedRows === 0) return res.status(404).json({ Sucesso: false, Mensagem: 'Imóvel não encontrado.' })
-            
+
             res.status(200).json({ Sucesso: true, Mensagem: 'Imóvel deletado com sucesso.' })
         } catch (err) {
-            res.status(500).json({ Sucesso: false, Erro: err.message })    
+            res.status(500).json({ Sucesso: false, Erro: err.message })
         }
     }
 
