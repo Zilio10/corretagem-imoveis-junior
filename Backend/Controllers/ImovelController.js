@@ -1,5 +1,7 @@
 const Imovel = require('../Models/Imovel')
 const ImovelRepository = require('../Repositories/ImovelRepository')
+const ImagemImovelRepository = require('../Repositories/ImagemImovelRepository')
+const { uploadToBunny } = require('../Utils/bunnyUpload')
 
 class ImovelController {
 
@@ -13,8 +15,23 @@ class ImovelController {
             )
 
             const imovelObj = new Imovel(req.body)
-
             const idImovel = await ImovelRepository.Create(imovelObj)
+
+            if (req.files && req.files.length > 0) { 
+                const uploads = req.files.map(async(file,index) => {
+                    const extImg = file.originalname.split('.').pop() // Extrai a extensão do arquivo original (ex: "jpg")
+                    const fileName = `${Date.now()}-${idImovel}-${index + 1}.${extImg}` // Gera um nome único para o arquivo (ex: "1690000000000-123-1.jpg")
+
+                    const urlCdn = await uploadToBunny(file.buffer, fileName) // Faz upload para Bunny que retorna a URL do CDN
+
+                    return ImagemImovelRepository.Create({
+                        _enderecoImagem: urlCdn,
+                        _posicaoImagem: index + 1, // Define a posição da imagem com base na ordem do upload (1, 2, 3, ...)
+                        _idImovelImagem: idImovel
+                    })
+                })
+                await Promise.all(uploads) // Aguarda todos os uploads e inserções no banco serem concluídos
+            }
 
             res.status(201).json({ Sucesso: true,Id_Imovel: idImovel })
 

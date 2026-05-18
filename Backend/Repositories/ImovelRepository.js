@@ -30,7 +30,7 @@ class ImovelRepository{
     }
 
     async GetAll() {
-        const sql = 'SELECT * FROM Imoveis ORDER BY data_criacao_imovel'
+        const sql = 'SELECT * FROM Imoveis ORDER BY data_criacao_imovel DESC'
         
         const [rows] = await DB.execute(sql)
         return rows

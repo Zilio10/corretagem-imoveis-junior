@@ -2,6 +2,9 @@ import { FaTimes } from 'react-icons/fa'
 import { useEffect, useState } from "react"
 import { isAuthenticated, getToken } from "../../utils/auth"
 import { getaddressByCep } from "../../services/cepService"
+import { createImovel } from "../../services/imovelService"
+
+import Swal from 'sweetalert2'
 
 import '../../styles/pages/ImovelAdd.css'
 
@@ -30,10 +33,32 @@ export default function ImovelAdd() {
     const [bathrooms, setBathrooms] = useState(0) // Banheiros
     const [parkingSpaces, setParkingSpaces] = useState(0) // Vagas de garagem
 
-    const [imovelData, setImovelData] = useState({}) // Dados do imóvel a serem enviados para a API
 
+    const swalStyled = Swal.mixin({
+        customClass: {
+            popup: 'swal-popup',
+            title: 'swal-title',
+            htmlContainer: 'swal-text',
+            confirmButton: 'swal-btn-confirm',
+        },
+        buttonsStyling: false,
+    })
 
-
+    const toaster = (success, message = '') => {
+        if (success) {
+            swalStyled.fire({
+                icon: 'success',
+                title: 'Sucesso!',
+                text: 'Dados atualizados com sucesso!',
+            })
+        } else {
+            swalStyled.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'Erro ao atualizar dados: ' + message,
+            })
+        }
+    }
 
     const handleImagemAdd = (e) => {
         const files = Array.from(e.target.files)
@@ -108,28 +133,44 @@ export default function ImovelAdd() {
         }
     }
 
-    const handleSubmit = () => {
-        setImovelData({
-            titulo: title,
-            descricao: description,
-            preco: price,
-            tipo: type,
-            finalidade: finality,
-            estagio: stage,
-            status: status,
-            cep: cep,
-            cidade: city,
-            bairro: neighborhood,
-            endereco: adress,
-            area: `${area} ${areaUnit}`,
-            qtdQuartos: Number(bedrooms),
-            qtdSuites: Number(suites),
-            qtdBanheiros: Number(bathrooms),
-            qtdVagas: Number(parkingSpaces),
-            dataCriacao: new Date().toISOString().slice(0, 19).replace("T", " ") //Formata a data no formato "YYYY-MM-DD HH:MM:SS" para compatibilidade com o MySQL
-        })
+    const handleSubmit = async () => {
+        const formData = new FormData()
 
-        console.log(imovelData)
+        // Campos do imóvel
+        formData.append("titulo", title)
+        formData.append("descricao", description)
+        formData.append("preco", price)
+        formData.append("tipo", type)
+        formData.append("finalidade", finality)
+        formData.append("estagio", stage)
+        formData.append("status", status)
+        formData.append("cep", cep)
+        formData.append("cidade", city)
+        formData.append("bairro", neighborhood)
+        formData.append("endereco", adress)
+        formData.append("area", `${area} ${areaUnit}`)
+        formData.append("qtdQuartos", Number(bedrooms))
+        formData.append("qtdSuites", Number(suites))
+        formData.append("qtdBanheiros", Number(bathrooms))
+        formData.append("qtdVagas", Number(parkingSpaces))
+        formData.append("dataCriacao", new Date().toISOString().slice(0, 19).replace("T", " "))
+
+        // Imagens (o campo precisa se chamar "imagens", igual ao upload.array('imagens') do backend)
+        imagens.forEach(img => formData.append("imagens", img.file))
+
+        try {
+            const res = await createImovel(formData, userToken)
+            if (res.data.Sucesso) {
+                toaster(true)
+                setTimeout(() => window.location.reload(), 1500)
+            } else {
+                toaster(false, res.data.Erro)
+            }
+
+        } catch (err) {
+            console.error("Erro ao cadastrar:", err)
+            toaster(false, err.response?.data?.Erro || err.message)
+        }
     }
 
     useEffect(() => {

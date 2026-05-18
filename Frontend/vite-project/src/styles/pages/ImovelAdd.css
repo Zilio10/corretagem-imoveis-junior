@@ -415,3 +415,83 @@
         font-size: 16px;
     }
 }
+
+/* ===== SWEETALERT2 ===== */
+.swal-popup {
+    border-radius: 16px !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07) !important;
+    padding: 32px 28px !important;
+    font-family: inherit !important;
+    width: 90% !important;
+    max-width: 420px !important;
+}
+
+.swal-title {
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    color: rgba(37, 38, 110, 0.699) !important;
+}
+
+.swal-text {
+    font-size: 14px !important;
+    color: #8a95a3 !important;
+}
+
+.swal-btn-confirm {
+    background: rgba(37, 38, 110, 0.699) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 12px 28px !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: background 0.2s ease, transform 0.15s ease !important;
+}
+
+.swal-btn-confirm:hover {
+    background: rgb(69, 71, 165) !important;
+    transform: scale(1.02) !important;
+}
+
+.swal-btn-confirm:active {
+    transform: scale(0.98) !important;
+}
+
+/* ícone de sucesso na cor do tema */
+.swal-popup .swal2-success-ring {
+    border-color: rgba(37, 38, 110, 0.2) !important;
+}
+
+.swal-popup .swal2-success-line-tip,
+.swal-popup .swal2-success-line-long {
+    background-color: rgba(37, 38, 110, 0.699) !important;
+}
+
+/* mobile */
+@media (max-width: 480px) {
+
+    .swal-popup {
+        width: calc(100% - 32px) !important;
+        max-width: 360px !important;
+        margin: 0 auto !important;
+
+        border-radius: 12px !important;
+        padding: 24px 18px !important;
+    }
+
+    .swal-title {
+        font-size: 18px !important;
+    }
+
+    .swal-text {
+        font-size: 13px !important;
+    }
+
+    .swal-btn-confirm {
+        width: 100% !important;
+        padding: 14px !important;
+    }
+
+}
