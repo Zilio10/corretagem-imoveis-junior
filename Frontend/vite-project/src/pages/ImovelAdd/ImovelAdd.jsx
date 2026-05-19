@@ -33,6 +33,8 @@ export default function ImovelAdd() {
     const [bathrooms, setBathrooms] = useState(0) // Banheiros
     const [parkingSpaces, setParkingSpaces] = useState(0) // Vagas de garagem
 
+    const [showLogoutModal, setShowLogoutModal] = useState(false)
+
 
     const swalStyled = Swal.mixin({
         customClass: {
@@ -134,9 +136,41 @@ export default function ImovelAdd() {
     }
 
     const handleSubmit = async () => {
+        const camposObrigatorios = [
+            { valor: title, nome: "Título" },
+            { valor: price, nome: "Preço" },
+            { valor: type, nome: "Tipo" },
+            { valor: finality, nome: "Finalidade" },
+            { valor: stage, nome: "Estágio" },
+            { valor: status, nome: "Status" },
+            { valor: city, nome: "Cidade" },
+            { valor: neighborhood, nome: "Bairro" },
+            { valor: street, nome: "Logradouro" },
+            { valor: area, nome: "Área" },
+        ]
+
+        const vazio = camposObrigatorios.find(c => !c.valor || c.valor.toString().trim() === "")
+
+        if (vazio) {
+            swalStyled.fire({
+                icon: 'warning',
+                title: 'Campo obrigatório',
+                text: `O campo "${vazio.nome}" é obrigatório.`,
+            })
+            return
+        }
+
+        if (imagens.length === 0) {
+            swalStyled.fire({
+                icon: 'warning',
+                title: 'Imagens obrigatórias',
+                text: 'Adicione pelo menos uma imagem.',
+            })
+            return
+        }
+
         const formData = new FormData()
 
-        // Campos do imóvel
         formData.append("titulo", title)
         formData.append("descricao", description)
         formData.append("preco", price)
@@ -155,7 +189,6 @@ export default function ImovelAdd() {
         formData.append("qtdVagas", Number(parkingSpaces))
         formData.append("dataCriacao", new Date().toISOString().slice(0, 19).replace("T", " "))
 
-        // Imagens (o campo precisa se chamar "imagens", igual ao upload.array('imagens') do backend)
         imagens.forEach(img => formData.append("imagens", img.file))
 
         try {
@@ -166,7 +199,6 @@ export default function ImovelAdd() {
             } else {
                 toaster(false, res.data.Erro)
             }
-
         } catch (err) {
             console.error("Erro ao cadastrar:", err)
             toaster(false, err.response?.data?.Erro || err.message)
@@ -198,7 +230,7 @@ export default function ImovelAdd() {
                     <p className="imovel-card-title">Informações Gerais</p>
 
                     <div className="imovel-field">
-                        <label>Título</label>
+                        <label>Título (obrigatório)</label>
                         <input type="text" placeholder="Ex: Casa com quintal em condomínio fechado" required value={title} onChange={(e) => { setTitle(e.target.value) }} />
                     </div>
 
@@ -209,11 +241,11 @@ export default function ImovelAdd() {
 
                     <div className="imovel-grid-2">
                         <div className="imovel-field">
-                            <label>Preço (R$)</label>
+                            <label>Preço (R$) (obrigatório)</label>
                             <input type="text" step="0.01" min="0" placeholder="0,00" required value={price} onChange={(e) => { handlePrice(e.target.value) }} />
                         </div>
                         <div className="imovel-field">
-                            <label>Tipo</label>
+                            <label>Tipo (obrigatório)</label>
                             <select value={type} onChange={(e) => { setType(e.target.value) }}>
                                 <option value="">Selecione</option>
                                 <option value="Casa">Casa</option>
@@ -226,7 +258,7 @@ export default function ImovelAdd() {
 
                     <div className="imovel-grid-3">
                         <div className="imovel-field">
-                            <label>Finalidade</label>
+                            <label>Finalidade (obrigatório)</label>
                             <select value={finality} onChange={(e) => { setFinality(e.target.value) }}>
                                 <option value="">Selecione</option>
                                 <option value="Venda">Venda</option>
@@ -235,7 +267,7 @@ export default function ImovelAdd() {
                             </select>
                         </div>
                         <div className="imovel-field">
-                            <label>Estágio</label>
+                            <label>Estágio (obrigatório)</label>
                             <select value={stage} onChange={(e) => { setStage(e.target.value) }}>
                                 <option value="">Selecione</option>
                                 <option value="Concluído">Pronto</option>
@@ -244,7 +276,7 @@ export default function ImovelAdd() {
                             </select>
                         </div>
                         <div className="imovel-field">
-                            <label>Status</label>
+                            <label>Status (obrigatório)</label>
                             <select value={status} onChange={(e) => { setStatus(e.target.value) }}>
                                 <option value="">Selecione</option>
                                 <option value="Disponível">Disponível</option>
@@ -272,15 +304,15 @@ export default function ImovelAdd() {
                             }} />
                         </div>
                         <div className="imovel-field">
-                            <label>Cidade</label>
+                            <label>Cidade (obrigatório)</label>
                             <input type="text" placeholder="Ex: São Paulo" required value={city} onChange={(e) => { setCity(e.target.value) }} />
                         </div>
                         <div className="imovel-field">
-                            <label>Bairro</label>
+                            <label>Bairro (obrigatório)</label>
                             <input type="text" placeholder="Ex: Centro" required value={neighborhood} onChange={(e) => { setNeighborhood(e.target.value) }} />
                         </div>
                         <div className="imovel-field imovel-street-field">
-                            <label>Logradouro</label>
+                            <label>Logradouro (obrigatório)</label>
                             <input type="text" placeholder="Ex: Rua das Flores" required value={street} onChange={(e) => { setStreet(e.target.value) }} />
                         </div>
                         <div className="imovel-field imovel-number-field">
@@ -299,7 +331,7 @@ export default function ImovelAdd() {
                     <p className="imovel-card-title">Características</p>
 
                     <div className="imovel-field">
-                        <label>Área</label>
+                        <label>Área (obrigatório)</label>
                         <div className="imovel-area-group">
                             <input type="number" min="0" placeholder="Ex: 250" required value={area} onChange={(e) => { setArea(e.target.value) }} />
                             <select required value={areaUnit} onChange={(e) => { setAreaUnit(e.target.value) }}>
@@ -373,15 +405,27 @@ export default function ImovelAdd() {
 
                 {/* BOTÕES */}
                 <div className="imovel-submit-row">
-                    <button className="imovel-btn-cancelar" onClick={(e) => {
-                        e.preventDefault()
-                        window.location.href = "/"
-                    }}>Cancelar</button>
                     <button className="imovel-btn-cadastrar" onClick={(e) => {
                         e.preventDefault()
                         handleSubmit()
                     }}>Cadastrar Imóvel</button>
+                    <button className="imovel-btn-cancelar" onClick={(e) => {
+                        e.preventDefault()
+                        setShowLogoutModal(true)
+                    }}>Cancelar</button>
                 </div>
+
+                {showLogoutModal && (
+                    <div className="modal-overlay">
+                        <div className="modal">
+                            <p>Tem certeza que deseja sair?</p>
+                            <div className="modal-actions">
+                                <button onClick={() => setShowLogoutModal(false)}>Cancelar</button>
+                                <button onClick={() => { window.location.href = "/"; setShowLogoutModal(false); }}>Confirmar</button>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
             </div>
         </div>
