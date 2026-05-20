@@ -15,7 +15,7 @@ class ImagemImovelRepository {
     }
 
     async GetByImovel(idImovel) {
-        const sql = 'SELECT * FROM Imagens_Imoveis WHERE id_imovel_imagem = ?'
+        const sql = 'SELECT * FROM Imagens_Imoveis WHERE id_imovel_imagem = ? ORDER BY posicao_imagem ASC'
         const params = [idImovel]
 
         const [rows] = await DB.execute(sql, params)
