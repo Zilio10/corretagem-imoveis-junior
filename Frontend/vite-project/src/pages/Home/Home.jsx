@@ -51,12 +51,13 @@ export default function Home() {
       <SearchBar />
 
       {loading ? (
-        <div className="loading-container">
-          <div className="spinner"></div>
+        <div className="imovel-loading">
+          <span className="imovel-loading__spinner" />
+          <p>Carregando imóveis...</p>
         </div>
       ) : imoveis.length > 0 ? (
         <div className="imoveis-navegation">
-            <Cards imoveis={imoveisPagina} title='IMÓVEIS RECENTES' found={ imoveis.length } />
+          <Cards imoveis={imoveisPagina} title='IMÓVEIS RECENTES' found={imoveis.length} />
           <Pagination
             limit={LIMIT}
             total={imoveis.length}

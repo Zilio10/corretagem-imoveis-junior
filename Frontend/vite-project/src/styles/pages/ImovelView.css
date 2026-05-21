@@ -1,0 +1,546 @@
+/* ===== Base & Variables ===== */
+.iv-page {
+    --iv-primary: rgba(37, 38, 110, 0.699);
+    --iv-primary-light: rgba(37, 38, 110, 0.08);
+
+    --iv-accent: #e8a020;
+
+    --iv-text: #1a2332;
+    --iv-text-muted: #8a95a3;
+
+    --iv-border: #e5e7eb;
+
+    --iv-bg: #f4f6fb;
+    --iv-white: #ffffff;
+
+    --iv-radius: 16px;
+
+    --iv-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.06);
+
+    --iv-font-display: inherit;
+    --iv-font-body: inherit;
+
+    font-family: var(--iv-font-body);
+
+    color: var(--iv-text);
+
+    background: var(--iv-bg);
+
+    min-height: 100vh;
+}
+
+
+/* ===== Layout ===== */
+.iv-carousel {
+    width: 100%;
+    max-height: 520px;
+    overflow: hidden;
+}
+
+.iv-carousel>* {
+    width: 100%;
+    height: 100%;
+}
+
+.iv-content {
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 40px 24px 80px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 32px;
+}
+
+/* ===== Header ===== */
+.iv-header {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.iv-header__meta {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    align-items: center;
+}
+
+/* ===== Tags ===== */
+.iv-tag {
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    padding: 6px 14px;
+
+    border-radius: 999px;
+
+    background: var(--iv-primary-light);
+
+    color: var(--iv-primary);
+}
+
+.iv-tag--outline {
+    background: transparent;
+
+    border: 1px solid rgba(37, 38, 110, 0.2);
+
+    color: var(--iv-primary);
+}
+
+/* ===== Status badges ===== */
+.badge {
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    padding: 6px 14px;
+
+    border-radius: 999px;
+}
+
+.badge--available {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge--sold {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.badge--rented {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.badge--default {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+/* ===== Title ===== */
+.iv-title {
+    font-family: var(--iv-font-display);
+
+    font-size: clamp(26px, 4vw, 38px);
+
+    font-weight: 600;
+
+    line-height: 1.2;
+
+    color: var(--iv-text);
+
+    margin: 0;
+}
+
+/* ===== Address ===== */
+.iv-address {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    font-size: 14px;
+
+    color: var(--iv-text-muted);
+
+    margin: 0;
+}
+
+.iv-icon {
+    width: 16px;
+    height: 16px;
+
+    flex-shrink: 0;
+
+    color: var(--iv-primary);
+}
+
+/* ===== Price Row ===== */
+.iv-price-row {
+    display: flex;
+
+    align-items: stretch;
+
+    gap: 0;
+
+    background: var(--iv-white);
+
+    border: 1px solid var(--iv-border);
+
+    border-radius: var(--iv-radius);
+
+    box-shadow: var(--iv-shadow);
+
+    overflow: hidden;
+}
+
+.iv-price {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+
+    padding: 24px 28px;
+
+    border-right: 1px solid var(--iv-border);
+}
+
+.iv-price__label {
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    color: var(--iv-text-muted);
+}
+
+.iv-price__value {
+    font-family: var(--iv-font-display);
+
+    font-size: clamp(24px, 3vw, 34px);
+
+    font-weight: 630;
+
+    color: var(--iv-primary);
+}
+
+.iv-stage {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+
+    padding: 24px 28px;
+
+    min-width: 180px;
+}
+
+.iv-stage__label {
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    color: var(--iv-text-muted);
+}
+
+.iv-stage__value {
+    font-size: 18px;
+    font-weight: 700;
+
+    color: var(--iv-text);
+}
+
+/* ===== Features Grid ===== */
+.iv-features {
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+
+    gap: 16px;
+}
+
+.iv-feature {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 24px 16px;
+
+    background: var(--iv-white);
+
+    border: 1px solid var(--iv-border);
+
+    border-radius: var(--iv-radius);
+
+    box-shadow: var(--iv-shadow);
+
+    text-align: center;
+
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        transform 0.15s;
+}
+
+.iv-feature:hover {
+    border-color: rgba(37, 38, 110, 0.2);
+
+    box-shadow:
+        0 4px 20px rgba(37, 38, 110, 0.08);
+
+    transform: translateY(-2px);
+}
+
+.iv-feature__icon,
+.iv-feat-icon {
+    width: 24px;
+    height: 24px;
+
+    color: var(--iv-primary);
+}
+
+.iv-feature__value,
+.iv-feat-value {
+    font-size: 22px;
+    font-weight: 650;
+
+    color: var(--iv-text);
+
+    line-height: 1;
+}
+
+.iv-feature__label,
+.iv-feat-label {
+    font-size: 12px;
+
+    color: var(--iv-text-muted);
+
+    letter-spacing: 0.04em;
+}
+
+/* ===== Divider ===== */
+.iv-divider {
+    border: none;
+    border-top: 1px solid var(--iv-border);
+    margin: 0;
+}
+
+/* ===== Section title ===== */
+.iv-section-title {
+    font-size: 11px;
+    font-weight: 800;
+
+    color: rgba(37, 38, 110, 0.7);
+
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    padding-bottom: 12px;
+
+    border-bottom: 2px solid #f0f2f5;
+
+    margin: 0 0 18px;
+}
+
+/* ===== Description ===== */
+.iv-description {
+    display: flex;
+    flex-direction: column;
+}
+
+.iv-description__text {
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    color: #5f6b7a;
+
+    margin: 0;
+
+    white-space: pre-line;
+}
+
+/* ===== CTA ===== */
+.iv-cta {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+.iv-btn {
+    flex: 1;
+
+    min-width: 180px;
+
+    padding: 14px 28px;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    border: none;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease;
+}
+
+.iv-btn:active {
+    transform: scale(0.98);
+}
+
+.iv-btn--primary {
+    background: var(--iv-primary);
+
+    color: var(--iv-white);
+}
+
+.iv-btn--primary:hover {
+    background: rgb(69, 71, 165);
+
+    transform: scale(1.02);
+}
+
+.iv-btn--ghost {
+    background: transparent;
+
+    color: var(--iv-primary);
+
+    border: 1px solid var(--iv-border);
+}
+
+.iv-btn--ghost:hover {
+    background: var(--iv-primary-light);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+
+    .iv-content {
+        padding: 28px 16px 60px;
+
+        gap: 24px;
+    }
+
+    .iv-price-row {
+        flex-direction: column;
+    }
+
+    .iv-price {
+        border-right: none;
+        border-bottom: 1px solid var(--iv-border);
+    }
+
+    .iv-stage {
+        min-width: unset;
+    }
+
+    .iv-features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .iv-btn {
+        min-width: unset;
+
+        flex: 1 1 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .iv-page {
+        background: #ffffff;
+    }
+
+    .iv-content {
+        padding: 20px 14px 40px;
+    }
+
+    .iv-features {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 12px;
+    }
+
+    .iv-feature {
+        padding: 20px 12px;
+    }
+
+    .iv-title {
+        font-size: 28px;
+    }
+
+    .iv-price__value {
+        font-size: 28px;
+    }
+}
+
+/* ===== WHATSAPP FLOAT ===== */
+
+.iv-whatsapp {
+    position: fixed;
+
+    right: 22px;
+    bottom: 22px;
+
+    width: 62px;
+    height: 62px;
+
+    border-radius: 50%;
+
+    background: #25d366;
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 32px;
+
+    box-shadow:
+        0 10px 25px rgba(37, 211, 102, 0.35),
+        0 4px 10px rgba(0, 0, 0, 0.15);
+
+    z-index: 999;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.iv-whatsapp:hover {
+    transform: scale(1.08);
+
+    background: #1ebe5d;
+
+    box-shadow:
+        0 14px 30px rgba(37, 211, 102, 0.45),
+        0 6px 14px rgba(0, 0, 0, 0.18);
+}
+
+.iv-whatsapp:active {
+    transform: scale(0.96);
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 480px) {
+    .iv-whatsapp {
+        width: 56px;
+        height: 56px;
+
+        right: 16px;
+        bottom: 16px;
+
+        font-size: 28px;
+    }
+}

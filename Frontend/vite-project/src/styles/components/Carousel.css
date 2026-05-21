@@ -7,9 +7,10 @@
 
 .container-carousel {
     width: 100%;
-    border-radius: 18px;
+    border-radius: 0px;
     overflow: hidden;
     box-shadow: 0 10px 35px rgba(0,0,0,0.14);
+
 }
 
 .carousel-swiper {

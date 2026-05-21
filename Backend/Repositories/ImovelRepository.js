@@ -77,6 +77,8 @@ class ImovelRepository{
             params.push(Number(filtros.qtdVagas))
         }
 
+        sql += ' ORDER BY data_criacao_imovel DESC'
+
         const [rows] = await DB.execute(sql, params)
         return rows
     }
