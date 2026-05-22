@@ -13,6 +13,7 @@ export default function ImovelAdd() {
     const [userToken, setUserToken] = useState(null)
 
     const [imagens, setImagens] = useState([]) // Imagens
+    const [dragIndex, setDragIndex] = useState(null)
     const [title, setTitle] = useState("") // Título
     const [description, setDescription] = useState("") // Descrição
     const [price, setPrice] = useState("") // Preço
@@ -65,10 +66,10 @@ export default function ImovelAdd() {
     const handleImagemAdd = (e) => {
         const files = Array.from(e.target.files)
         const novas = files.map(file => ({
-            file, // file : file (parametro) => Arquivo da imagem
-            preview: URL.createObjectURL(file) // => URL temporária para pré-visualização da imagem
+            file,
+            preview: URL.createObjectURL(file)
         }))
-        setImagens(prev => [...prev, ...novas]) // => Adiciona as novas imagens ao estado, mantendo as anteriores (Se não sobreescreveria as anteriores)
+        setImagens(prev => [...prev, ...novas])
     }
 
     const handleImagemRemover = (index) => {
@@ -76,6 +77,29 @@ export default function ImovelAdd() {
             URL.revokeObjectURL(prev[index].preview)
             return prev.filter((_, i) => i !== index)
         })
+    }
+
+    const handleDragStartImage = (index) => {
+        setDragIndex(index)
+    }
+
+    const handleDropImage = (dropIndex) => {
+        if (dragIndex === null || dragIndex === dropIndex) return
+
+        const updatedImages = [...imagens]
+
+        const draggedItem = updatedImages[dragIndex]
+
+        updatedImages.splice(dragIndex, 1)
+
+        updatedImages.splice(dropIndex, 0, draggedItem)
+
+        setImagens(updatedImages)
+        setDragIndex(null)
+    }
+
+    const handleDragEndImage = () => {
+        setDragIndex(null)
     }
 
     const handleDragOver = (e) => {
@@ -362,7 +386,6 @@ export default function ImovelAdd() {
                     </div>
                 </div>
 
-                {/* CARD — IMAGENS */}
                 <div className="imovel-card">
                     <p className="imovel-card-title">Imagens</p>
 
@@ -388,8 +411,17 @@ export default function ImovelAdd() {
                     {imagens.length > 0 && (
                         <div className="imovel-upload-preview">
                             {imagens.map((img, index) => (
-                                <div key={index} className="imovel-preview-item">
+                                <div
+                                    key={index}
+                                    className={`imovel-preview-item ${dragIndex === index ? 'dragging' : ''}`}
+                                    draggable
+                                    onDragStart={() => handleDragStartImage(index)}
+                                    onDragOver={(e) => e.preventDefault()}
+                                    onDrop={() => handleDropImage(index)}
+                                    onDragEnd={handleDragEndImage}
+                                >
                                     <img src={img.preview} alt={`Imagem ${index + 1}`} />
+
                                     <button
                                         className="imovel-preview-remove"
                                         onClick={() => handleImagemRemover(index)}
@@ -397,13 +429,17 @@ export default function ImovelAdd() {
                                     >
                                         <FaTimes />
                                     </button>
+
+                                    <span className="imovel-image-order">
+                                        {index + 1}
+                                    </span>
                                 </div>
                             ))}
                         </div>
                     )}
                 </div>
 
-                {/* BOTÕES */}
+                 {/* BOTÕES */}
                 <div className="imovel-submit-row">
                     <button className="imovel-btn-cadastrar" onClick={(e) => {
                         e.preventDefault()
@@ -419,6 +455,7 @@ export default function ImovelAdd() {
                     <div className="modal-overlay">
                         <div className="modal">
                             <p>Tem certeza que deseja sair?</p>
+                            <p>As alterações realizadas serão perdidas.</p>
                             <div className="modal-actions">
                                 <button onClick={() => setShowLogoutModal(false)}>Cancelar</button>
                                 <button onClick={() => { window.location.href = "/"; setShowLogoutModal(false); }}>Confirmar</button>

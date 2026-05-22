@@ -22,7 +22,7 @@ function StatusBadge({ status }) {
     const map = {
         "Disponível": "badge--available",
         "Vendido": "badge--sold",
-        "Locado": "badge--rented",
+        "Alugado": "badge--rented",
     }
     return (
         <span className={`badge ${map[status] ?? "badge--default"}`}>
