@@ -65,7 +65,7 @@ export default function Navbar() {
   const navLinks = [
     { label: "Aluguel", href: "/imovelFilter", state: { finalidade: "Aluguel" } },
     { label: "Venda", href: "/imovelFilter", state: { finalidade: "Venda" } },
-    { label: "Sobre", href: "/sobre" },
+    { label: "Sobre", href: "/about" },
     { label: "Contato", href: "#footer__contato", ancora: true }
   ]
 

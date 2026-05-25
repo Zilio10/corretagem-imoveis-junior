@@ -11,6 +11,7 @@ import ImovelView from './pages/ImovelView/ImovelView'
 import ImovelEdit from './pages/ImovelEdit/ImovelEdit'
 import ImovelFilter from './pages/ImovelFilter/ImovelFilter'
 import ImovelAdd from './pages/ImovelAdd/ImovelAdd'
+import About from './pages/About/About'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path='/imovelView/:idImovel' element={<ImovelView />} />
           <Route path='/imovelEdit/:idImovel' element={<ImovelEdit />} />
           <Route path='/adicionar-imovel' element={<ImovelAdd />} />
+          <Route path='/about' element={<About />} />
         </Routes>
         
       </main>
