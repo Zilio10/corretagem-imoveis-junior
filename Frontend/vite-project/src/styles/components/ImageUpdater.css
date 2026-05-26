@@ -1,0 +1,114 @@
+.iu-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.iu-loading {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(37, 38, 110, 0.6);
+    text-align: right;
+    letter-spacing: 0.05em;
+}
+
+.iu-empty {
+    text-align: center;
+    color: #b0bac5;
+    font-size: 14px;
+    padding: 24px 0;
+    margin: 0;
+}
+
+/* ── grid ── */
+.iu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+}
+
+/* ── item ── */
+.iu-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    border: 1px solid #e5e7eb;
+    background: #f0f2f5;
+    cursor: grab;
+    touch-action: none;
+    transition: box-shadow 0.2s ease;
+}
+
+.iu-item:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.iu-item--dragging {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    cursor: grabbing;
+}
+
+.iu-item__drag {
+    width: 100%;
+    height: 100%;
+}
+
+.iu-item__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ── badge capa ── */
+.iu-item__badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(37, 38, 110, 0.75);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    pointer-events: none;
+}
+
+/* ── botão delete ── */
+.iu-item__delete {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    z-index: 10;
+}
+
+.iu-item__delete:hover {
+    background: rgba(192, 57, 43, 0.9);
+}
+
+/* ── mobile ── */
+@media (max-width: 480px) {
+    .iu-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 8px;
+    }
+}
+
+

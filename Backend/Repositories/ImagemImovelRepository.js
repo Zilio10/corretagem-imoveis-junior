@@ -33,12 +33,20 @@ class ImagemImovelRepository {
         return rows
     }
 
+    async GetById(idImg) { // Utilizado para manipulação no Bunny
+        const sql = 'SELECT * FROM Imagens_Imoveis WHERE id_imagem = ?'
+        const params = [idImg]
+
+        const [rows] = await DB.execute(sql, params)
+        return rows
+    }
+
     async Update(imgImovelObj, idImg) { // IDEIA: Só atualizzar a posição da imagem, pois será possível a troca de posição das imagens no carrocel presente no site
         const sql = 'UPDATE Imagens_Imoveis SET endereco_imagem = ?, posicao_imagem = ?, id_imovel_imagem = ? WHERE id_imagem = ?'
         const params = [
             imgImovelObj._enderecoImagem,
             imgImovelObj._posicaoImagem,
-            imgImovelObj._idImovelImagem, 
+            imgImovelObj._idImovelImagem,
             idImg
         ]
 

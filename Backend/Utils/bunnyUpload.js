@@ -1,6 +1,6 @@
 const https = require('https')
 
-async function uploadToBunny (fileBuffer, fileName) {
+async function uploadToBunny(fileBuffer, fileName) {
     const storageZone = process.env.BUNNY_STORAGE_ZONE
     const apiKey = process.env.BUNNY_API_KEY
     const cdnUrl = process.env.BUNNY_CDN_URL
@@ -34,4 +34,37 @@ async function uploadToBunny (fileBuffer, fileName) {
     })
 }
 
-module.exports = { uploadToBunny }
+async function deleteFromBunny(fileName) {
+    const storageZone = process.env.BUNNY_STORAGE_ZONE
+    const apiKey = process.env.BUNNY_API_KEY
+
+    const remotePath = `imoveis/${fileName}`
+
+    return new Promise((resolve, reject) => {
+        const options = {
+            method: 'DELETE',
+            hostname: 'br.storage.bunnycdn.com',
+            path: `/${storageZone}/${remotePath}`,
+            headers: {
+                'AccessKey': apiKey,
+            },
+        }
+
+        const req = https.request(options, (res) => {
+            if (res.statusCode === 200) {
+                resolve(true)
+            } else {
+                reject(
+                    new Error(`Bunny retornou status ${res.statusCode} para ${fileName}`)
+                )
+            }
+
+            res.resume()
+        })
+
+        req.on('error', reject)
+        req.end()
+    })
+}
+
+module.exports = { uploadToBunny, deleteFromBunny }

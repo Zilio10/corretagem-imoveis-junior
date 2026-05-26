@@ -4,12 +4,23 @@ import { isAuthenticated, getToken } from "../../utils/auth";
 import { getAllFiltered } from "../../services/imovelService";
 import { getByImovel } from "../../services/imagemService";
 
+import "../../styles/pages/ImovelEdit.css"
+
+import ImageUpdater from "../../components/ImageUpdater/ImageUptader";
+
 export default function ImovelEdit() {
     const { idImovel } = useParams()
     const [userToken, setUserToken] = useState(null)
 
     const [imovelData, setImovelData] = useState(null)
     const [images, setImages] = useState(null)
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "instant"
+        })
+    }, [idImovel])
 
     useEffect(() => {
             if (!isAuthenticated()) return
@@ -43,8 +54,10 @@ export default function ImovelEdit() {
     }, [idImovel]) 
 
     return (
-
-        <div> {JSON.stringify(imovelData)}</div>
+        <div className="ie-page">
+            {images && <ImageUpdater images={images} />}
+            <div> {JSON.stringify(imovelData)}</div>
+        </div>
         
     )
 }
