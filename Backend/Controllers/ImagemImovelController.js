@@ -2,19 +2,34 @@ const ImagemImovel = require('../Models/ImagemImovel')
 const ImagemImovelRepository = require('../Repositories/ImagemImovelRepository')
 const { deleteFromBunny } = require('../Utils/bunnyUpload')
 
+const upload = require('../Middlewares/UploadMiddleware')
+const { uploadToBunny } = require('../Utils/bunnyUpload')
+
 class ImagemImovelController {
 
     async Create(req, res) {
-        try {
-            const imgImovelObj = new ImagemImovel(req.body)
-            const idImg = await ImagemImovelRepository.Create(imgImovelObj)
+    try {
+        const idImovel = parseInt(req.body.idImovel)
+        const posicao  = parseInt(req.body.posicao)
 
-            res.status(201).json({ Sucesso: true, Id_Imagem: idImg })
-        } catch (err) {
-            res.status(500).json({ Sucesso: false, Erro: err.message })
-        }
+        const file     = req.file
+        const ext      = file.originalname.split('.').pop()
+        const fileName = `${Date.now()}-${idImovel}-${posicao}.${ext}`
+
+        const urlCdn = await uploadToBunny(file.buffer, fileName)
+
+        const idImg = await ImagemImovelRepository.Create({
+            _enderecoImagem:  urlCdn,
+            _posicaoImagem:   posicao,
+            _idImovelImagem:  idImovel,
+        })
+
+        res.status(201).json({ Sucesso: true, Id_Imagem: idImg, Endereco: urlCdn })
+
+    } catch (err) {
+        res.status(500).json({ Sucesso: false, Erro: err.message })
     }
-
+}
     async GetByImovel(req, res) {
         try {
             const idImovel = parseInt(req.params.idImovel)

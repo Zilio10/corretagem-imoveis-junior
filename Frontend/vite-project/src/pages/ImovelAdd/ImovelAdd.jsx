@@ -254,7 +254,7 @@ export default function ImovelAdd() {
                     <p className="imovel-card-title">Informações Gerais</p>
 
                     <div className="imovel-field">
-                        <label>Título (obrigatório)</label>
+                        <label>Título <span className="imovel-required">obrigatório</span></label>
                         <input type="text" placeholder="Ex: Casa com quintal em condomínio fechado" required value={title} onChange={(e) => { setTitle(e.target.value) }} />
                     </div>
 
@@ -265,11 +265,11 @@ export default function ImovelAdd() {
 
                     <div className="imovel-grid-2">
                         <div className="imovel-field">
-                            <label>Preço (R$) (obrigatório)</label>
+                            <label>Preço (R$) <span className="imovel-required">obrigatório</span></label>
                             <input type="text" step="0.01" min="0" placeholder="0,00" required value={price} onChange={(e) => { handlePrice(e.target.value) }} />
                         </div>
                         <div className="imovel-field">
-                            <label>Tipo (obrigatório)</label>
+                            <label>Tipo <span className="imovel-required">obrigatório</span></label>
                             <select value={type} onChange={(e) => { setType(e.target.value) }}>
                                 <option value="">Selecione</option>
                                 <option value="Casa">Casa</option>
@@ -282,7 +282,7 @@ export default function ImovelAdd() {
 
                     <div className="imovel-grid-3">
                         <div className="imovel-field">
-                            <label>Finalidade (obrigatório)</label>
+                            <label>Finalidade <span className="imovel-required">obrigatório</span></label>
                             <select value={finality} onChange={(e) => { setFinality(e.target.value) }}>
                                 <option value="">Selecione</option>
                                 <option value="Venda">Venda</option>
@@ -291,7 +291,7 @@ export default function ImovelAdd() {
                             </select>
                         </div>
                         <div className="imovel-field">
-                            <label>Estágio (obrigatório)</label>
+                            <label>Estágio <span className="imovel-required">obrigatório</span></label>
                             <select value={stage} onChange={(e) => { setStage(e.target.value) }}>
                                 <option value="">Selecione</option>
                                 <option value="Concluído">Pronto</option>
@@ -300,7 +300,7 @@ export default function ImovelAdd() {
                             </select>
                         </div>
                         <div className="imovel-field">
-                            <label>Status (obrigatório)</label>
+                            <label>Status <span className="imovel-required">obrigatório</span></label>
                             <select value={status} onChange={(e) => { setStatus(e.target.value) }}>
                                 <option value="">Selecione</option>
                                 <option value="Disponível">Disponível</option>
@@ -328,15 +328,15 @@ export default function ImovelAdd() {
                             }} />
                         </div>
                         <div className="imovel-field">
-                            <label>Cidade (obrigatório)</label>
+                            <label>Cidade <span className="imovel-required">obrigatório</span></label>
                             <input type="text" placeholder="Ex: São Paulo" required value={city} onChange={(e) => { setCity(e.target.value) }} />
                         </div>
                         <div className="imovel-field">
-                            <label>Bairro (obrigatório)</label>
+                            <label>Bairro <span className="imovel-required">obrigatório</span></label>
                             <input type="text" placeholder="Ex: Centro" required value={neighborhood} onChange={(e) => { setNeighborhood(e.target.value) }} />
                         </div>
                         <div className="imovel-field imovel-street-field">
-                            <label>Logradouro (obrigatório)</label>
+                            <label>Logradouro <span className="imovel-required">obrigatório</span></label>
                             <input type="text" placeholder="Ex: Rua das Flores" required value={street} onChange={(e) => { setStreet(e.target.value) }} />
                         </div>
                         <div className="imovel-field imovel-number-field">
@@ -355,7 +355,7 @@ export default function ImovelAdd() {
                     <p className="imovel-card-title">Características</p>
 
                     <div className="imovel-field">
-                        <label>Área (obrigatório)</label>
+                        <label>Área <span className="imovel-required">obrigatório</span></label>
                         <div className="imovel-area-group">
                             <input type="number" min="0" placeholder="Ex: 250" required value={area} onChange={(e) => { setArea(e.target.value) }} />
                             <select required value={areaUnit} onChange={(e) => { setAreaUnit(e.target.value) }}>
@@ -444,7 +444,7 @@ export default function ImovelAdd() {
                     <button className="imovel-btn-cadastrar" onClick={(e) => {
                         e.preventDefault()
                         handleSubmit()
-                    }}>Cadastrar Imóvel</button>
+                    }}>Criar Anúncio</button>
                     <button className="imovel-btn-cancelar" onClick={(e) => {
                         e.preventDefault()
                         setShowLogoutModal(true)

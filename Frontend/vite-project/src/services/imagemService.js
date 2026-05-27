@@ -12,3 +12,8 @@ export const updateImage = (idImg, imageData, token) => api.put(`/imagens/${idIm
         Authorization: `Bearer ${token}`
     }
 })
+export const uploadImage = (formData, token) => api.post('/imagens/', formData, {
+    headers: {
+        Authorization: `Bearer ${token}`,
+    }
+})

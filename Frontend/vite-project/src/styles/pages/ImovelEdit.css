@@ -1,0 +1,480 @@
+/* ===== IMOVEL EDIT PAGE ===== */
+.imovel-edit-page {
+    min-height: calc(100vh - 140px);
+    background: #f4f6fb;
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imovel-edit-page .imovel-edit-wrapper {
+    width: 100%;
+    max-width: 960px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ===== PAGE HEADER ===== */
+.imovel-edit-page .imovel-page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+}
+
+.imovel-edit-page .imovel-header-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(37, 38, 110, 0.07);
+    border: 1px solid rgba(37, 38, 110, 0.12);
+    border-radius: 999px;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(37, 38, 110, 0.65);
+    letter-spacing: 0.04em;
+    margin: 0 auto 6px;
+}
+
+.imovel-edit-page .imovel-header-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(37, 38, 110, 0.35);
+}
+
+.imovel-edit-page .imovel-page-header h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: rgba(37, 38, 110, 0.85);
+    margin: 0;
+}
+
+.imovel-edit-page .imovel-page-header p {
+    font-size: 14px;
+    color: #8a95a3;
+    margin: 0;
+}
+
+/* ===== CARD ===== */
+.imovel-edit-page .imovel-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.imovel-edit-page .imovel-card-title {
+    font-size: 11px;
+    font-weight: 800;
+    color: rgba(37, 38, 110, 0.7);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f0f2f5;
+    margin: 0;
+}
+
+/* ===== GRID LAYOUTS ===== */
+.imovel-edit-page .imovel-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.imovel-edit-page .imovel-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+}
+
+.imovel-edit-page .imovel-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+/* ===== FIELD ===== */
+.imovel-edit-page .imovel-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.imovel-edit-page .imovel-field label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #8a95a3;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.imovel-edit-page .imovel-required {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(37, 38, 110, 0.45);
+    background: rgba(37, 38, 110, 0.06);
+    border-radius: 4px;
+    padding: 1px 6px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.imovel-edit-page .imovel-field input,
+.imovel-edit-page .imovel-field select,
+.imovel-edit-page .imovel-field textarea {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid #eaecf0;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #1a2332;
+    background: #f8f9fb;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.imovel-edit-page .imovel-field input::placeholder,
+.imovel-edit-page .imovel-field textarea::placeholder {
+    color: #b0bac5;
+}
+
+.imovel-edit-page .imovel-field input:focus,
+.imovel-edit-page .imovel-field select:focus,
+.imovel-edit-page .imovel-field textarea:focus {
+    border-color: rgba(37, 38, 110, 0.45);
+    box-shadow: 0 0 0 3px rgba(37, 38, 110, 0.08);
+    background: #ffffff;
+}
+
+.imovel-edit-page .imovel-field textarea {
+    resize: vertical;
+    min-height: 110px;
+    line-height: 1.6;
+}
+
+.imovel-edit-page .imovel-field select {
+    cursor: pointer;
+}
+
+/* ===== READONLY ROW (CEP) ===== */
+.imovel-edit-page .imovel-readonly-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.imovel-edit-page .imovel-readonly-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: #f4f6fb;
+    border: 1px solid #eaecf0;
+    border-radius: 8px;
+    padding: 10px 16px;
+    min-width: 160px;
+}
+
+.imovel-edit-page .imovel-readonly-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #b0bac5;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.imovel-edit-page .imovel-readonly-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+}
+
+/* ===== ÁREA ===== */
+.imovel-edit-page .imovel-area-group {
+    display: flex;
+    gap: 8px;
+}
+
+.imovel-edit-page .imovel-area-group input {
+    flex: 1;
+}
+
+.imovel-edit-page .imovel-area-group select {
+    width: 88px;
+    flex-shrink: 0;
+    padding: 13px 10px;
+}
+
+/* ===== BOTÕES ===== */
+.imovel-edit-page .imovel-submit-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.imovel-edit-page .imovel-btn-cancelar {
+    padding: 14px 28px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background: #ff0404ab;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    font-family: inherit;
+}
+
+.imovel-edit-page .imovel-btn-cancelar:hover {
+    background: #ff0000;
+    border-color: #d1d5db;
+}
+
+.imovel-edit-page .imovel-btn-salvar {
+    padding: 14px 36px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(37, 38, 110, 0.699);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+    font-family: inherit;
+}
+
+.imovel-edit-page .imovel-btn-salvar:hover {
+    background: rgb(69, 71, 165);
+    transform: scale(1.02);
+}
+
+.imovel-edit-page .imovel-btn-salvar:active {
+    transform: scale(0.98);
+}
+
+
+/* ===== SWEETALERT2 ===== */
+.swal-popup {
+    border-radius: 16px !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07) !important;
+    padding: 32px 28px !important;
+    font-family: inherit !important;
+    width: 90% !important;
+    max-width: 420px !important;
+}
+
+.swal-title {
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    color: rgba(37, 38, 110, 0.699) !important;
+}
+
+.swal-text {
+    font-size: 14px !important;
+    color: #8a95a3 !important;
+}
+
+.swal-btn-confirm {
+    background: rgba(37, 38, 110, 0.699) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 12px 28px !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: background 0.2s ease, transform 0.15s ease !important;
+}
+
+.swal-btn-confirm:hover {
+    background: rgb(69, 71, 165) !important;
+    transform: scale(1.02) !important;
+}
+
+.swal-btn-confirm:active {
+    transform: scale(0.98) !important;
+}
+
+.swal-popup .swal2-success-ring {
+    border-color: rgba(37, 38, 110, 0.2) !important;
+}
+
+.swal-popup .swal2-success-line-tip,
+.swal-popup .swal2-success-line-long {
+    background-color: rgba(37, 38, 110, 0.699) !important;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 768px) {
+    .imovel-edit-page {
+        padding: 1.5rem 1rem;
+    }
+
+    .imovel-edit-page .imovel-card {
+        padding: 22px 20px;
+    }
+
+    .imovel-edit-page .imovel-grid-3 {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .imovel-edit-page .imovel-grid-4 {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .imovel-edit-page .imovel-submit-row {
+        flex-direction: column;
+    }
+
+    .imovel-edit-page .imovel-btn-cancelar,
+    .imovel-edit-page .imovel-btn-salvar {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .imovel-edit-page {
+        padding: 1rem 0;
+        background: #ffffff;
+    }
+
+    .imovel-edit-page .imovel-edit-wrapper {
+        gap: 0;
+    }
+
+    .imovel-edit-page .imovel-page-header {
+        padding: 1.2rem 1.2rem 0;
+    }
+
+    .imovel-edit-page .imovel-card {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        box-shadow: none;
+        padding: 20px 16px;
+        margin-top: 1rem;
+    }
+
+    .imovel-edit-page .imovel-grid-2,
+    .imovel-edit-page .imovel-grid-3,
+    .imovel-edit-page .imovel-grid-4 {
+        grid-template-columns: 1fr;
+    }
+
+    .imovel-edit-page .imovel-area-group {
+        flex-direction: row;
+    }
+
+    .imovel-edit-page .imovel-area-group select {
+        width: 100px;
+    }
+
+    .imovel-edit-page .imovel-submit-row {
+        flex-direction: column;
+        padding: 0 16px 16px;
+    }
+
+    .imovel-edit-page .imovel-btn-cancelar,
+    .imovel-edit-page .imovel-btn-salvar {
+        width: 100%;
+        padding: 16px;
+        font-size: 16px;
+    }
+
+    .swal-popup {
+        width: calc(100% - 32px) !important;
+        max-width: 360px !important;
+        margin: 0 auto !important;
+        border-radius: 12px !important;
+        padding: 24px 18px !important;
+    }
+
+    .swal-title {
+        font-size: 18px !important;
+    }
+
+    .swal-text {
+        font-size: 13px !important;
+    }
+
+    .swal-btn-confirm {
+        width: 100% !important;
+        padding: 14px !important;
+    }
+}
+
+.imovel-danger-zone {
+    margin-top: 2rem;
+    border: 1px solid #ffb4b4;
+    background: #fff5f5;
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.imovel-danger-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.imovel-danger-content h3 {
+    margin: 0;
+    color: #d62828;
+    font-size: 1.1rem;
+}
+
+.imovel-danger-content p {
+    margin-top: .4rem;
+    color: #666;
+    font-size: .95rem;
+    line-height: 1.5;
+}
+
+.imovel-btn-delete {
+    border: none;
+    background: #d62828;
+    color: white;
+    padding: .9rem 1.3rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .2s;
+    white-space: nowrap;
+}
+
+.imovel-btn-delete:hover {
+    opacity: .9;
+}
+
+
+@media (max-width: 768px) {
+
+    .imovel-danger-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .imovel-btn-delete {
+        width: 100%;
+    }
+
+}

@@ -112,6 +112,17 @@
     text-transform: uppercase;
 }
 
+.imovel-add-page .imovel-required {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(37, 38, 110, 0.45);
+    background: rgba(37, 38, 110, 0.06);
+    border-radius: 4px;
+    padding: 1px 6px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
 .imovel-add-page .imovel-field input,
 .imovel-add-page .imovel-field select,
 .imovel-add-page .imovel-field textarea {
