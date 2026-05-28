@@ -14,11 +14,12 @@ html, body, #root {
 }
 
 /* Conteúdo principal */
-main {
+
+/* main {
   flex: 1;
   margin-left: 2%;
   margin-right: 2%;
-}
+} */
 
 html {
   scroll-behavior: smooth;

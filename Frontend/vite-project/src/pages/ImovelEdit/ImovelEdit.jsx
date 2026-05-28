@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { isAuthenticated, getToken } from "../../utils/auth";
-import { getAllFiltered } from "../../services/imovelService";
-import { getByImovel } from "../../services/imagemService";
+import { getAllFiltered, updateImovel, deleteImovel } from "../../services/imovelService";
+import { getByImovel, deleteImage } from "../../services/imagemService";
 
 import "../../styles/pages/ImovelEdit.css"
 
@@ -18,26 +18,25 @@ export default function ImovelEdit() {
     const [imovelData, setImovelData] = useState(null)
     const [images, setImages] = useState(null)
 
-    const [title, setTitle] = useState("") // Título
-    const [description, setDescription] = useState("") // Descrição
-    const [price, setPrice] = useState("") // Preço
-    const [type, setType] = useState("") // Tipo (Casa, Apartamento, Terreno, Fazenda)
-    const [finality, setFinality] = useState("") // Finalidade (Venda, Aluguel, Permuta)
-    const [stage, setStage] = useState("")  // Estágio (Concluído, Em construção, Na planta)
-    const [status, setStatus] = useState("") // Status (Disponível, Vendido, Alugado)
-    const [city, setCity] = useState("") // Cidade
-    const [neighborhood, setNeighborhood] = useState("") // Bairro
-    const [adress, setAddress] = useState("") // Endereço completo
-    const [area, setArea] = useState("") // Área
-    const [areaUnit, setAreaUnit] = useState("m²") // Unidade da área (m², he, alq)
-    const [bedrooms, setBedrooms] = useState(0) // Quartos
-    const [suites, setSuites] = useState(0) // Suítes
-    const [bathrooms, setBathrooms] = useState(0) // Banheiros
-    const [parkingSpaces, setParkingSpaces] = useState(0) // Vagas de garagem
+    const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
+    const [price, setPrice] = useState("")
+    const [type, setType] = useState("")
+    const [finality, setFinality] = useState("")
+    const [stage, setStage] = useState("")
+    const [status, setStatus] = useState("")
+    const [city, setCity] = useState("")
+    const [neighborhood, setNeighborhood] = useState("")
+    const [adress, setAddress] = useState("")
+    const [area, setArea] = useState("")
+    const [areaUnit, setAreaUnit] = useState("m²")
+    const [bedrooms, setBedrooms] = useState(0)
+    const [suites, setSuites] = useState(0)
+    const [bathrooms, setBathrooms] = useState(0)
+    const [parkingSpaces, setParkingSpaces] = useState(0)
 
     const [showCancelModal, setShowCancelModal] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
-
 
     const swalStyled = Swal.mixin({
         customClass: {
@@ -72,22 +71,79 @@ export default function ImovelEdit() {
         return { value: areaStr, unit: "m²" }
     }
 
-    function formatPrice(raw) {
-        const numStr = String(raw).replace(/[^\d]/g, "")
-        const number = Number(numStr) / 100
-        return number.toFixed(2)
-            .replace(".", ",")
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    // Idêntico ao ImovelAdd
+    const handlePrice = (value) => {
+        value = value.replace(/\D/g, "")
+        value = (Number(value) / 100).toFixed(2)
+        value = value.replace(".", ",")
+        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        setPrice(value)
     }
 
     async function handleSubmit() {
-        alert("Enviou")
+        const imovelObj = {
+            titulo: title,
+            descricao: description,
+            preco: parseFloat(price.replace(/\./g, "").replace(",", ".")),
+            tipo: type,
+            finalidade: finality,
+            estagio: stage,
+            status: status,
+            cep: imovelData.cep_imovel,
+            cidade: city,
+            bairro: neighborhood,
+            endereco: adress,
+            area: `${area} ${areaUnit}`,
+            qtdQuartos: bedrooms,
+            qtdSuites: suites,
+            qtdBanheiros: bathrooms,
+            qtdVagas: parkingSpaces,
+            dataCriacao: imovelData.data_criacao_imovel
+        }
+
+        try {
+            const res = await updateImovel(idImovel, imovelObj, userToken)
+
+            if (res.data.Sucesso) {
+                toaster(true)
+                setTimeout(() =>
+                    window.location.href = `/imovelView/${idImovel}`, 1500
+                )
+            }
+        } catch (err) {
+            console.log("Erro ao atualizar anúncio: ", err)
+            toaster(false, err.message)
+        }
     }
 
     async function handleDelete() {
-        alert("Deletou")
-    }
+        try {
 
+            for (const img of images) {
+                const res = await deleteImage(img.id_imagem, userToken)
+
+                if (!res.data.Sucesso) {
+                    toaster(false, "Erro ao deletar imagem.")
+                    return
+                }
+            }
+
+            const res2 = await deleteImovel(idImovel, userToken)
+            if (res2.data.Sucesso) {
+                
+                toaster(true)
+                setTimeout(() => {
+                    window.location.href = "/"
+                }, 1500)
+
+            } else {
+                toaster(false, res2.data.Mensagem || "Erro ao deletar imóvel.")
+            }
+        } catch (err) {
+            console.error("Erro ao deletar:", err)
+            toaster(false, err.message)
+        }
+    }
 
     useEffect(() => {
         window.scrollTo({
@@ -103,11 +159,9 @@ export default function ImovelEdit() {
     }, [])
 
     useEffect(() => {
-
         async function getImovelData(id) {
             try {
                 const res = await getAllFiltered({ id })
-                console.log(res.data.Imoveis)
                 setImovelData(res.data.Imoveis[0])
             } catch (err) {
                 console.error(err)
@@ -125,7 +179,6 @@ export default function ImovelEdit() {
 
         getImovelData(idImovel)
         getImovelImages(idImovel)
-
     }, [idImovel])
 
     useEffect(() => {
@@ -133,7 +186,8 @@ export default function ImovelEdit() {
 
         setTitle(imovelData.titulo_imovel || "")
         setDescription(imovelData.descricao_imovel || "")
-        setPrice(formatPrice(imovelData.preco_imovel) || "")
+        // Usa handlePrice para popular o state já formatado
+        handlePrice(String(imovelData.preco_imovel || "0").replace(/\D/g, ""))
         setType(imovelData.tipo_imovel || "")
         setFinality(imovelData.finalidade_imovel || "")
         setStage(imovelData.estagio_imovel || "")
@@ -147,11 +201,9 @@ export default function ImovelEdit() {
         setParkingSpaces(imovelData.qtd_vagas_imovel || 0)
         setArea(parseArea(imovelData.area_imovel).value)
         setAreaUnit(parseArea(imovelData.area_imovel).unit)
-
     }, [imovelData])
 
     return (
-
         <div className="imovel-edit-page">
             <div className="imovel-edit-wrapper">
 
@@ -174,7 +226,6 @@ export default function ImovelEdit() {
                 {/* CARD — IMAGENS */}
                 <div className="imovel-card">
                     <p className="imovel-card-title">Imagens</p>
-
                     <div className="imovel-imageupdater-container">
                         {images && <ImageUpdater images={images} />}
                     </div>
@@ -290,7 +341,6 @@ export default function ImovelEdit() {
                             onChange={(e) => setAddress(e.target.value)}
                         />
                     </div>
-
                 </div>
 
                 {/* CARD — CARACTERÍSTICAS */}
@@ -340,7 +390,6 @@ export default function ImovelEdit() {
                     <button className="imovel-btn-cancelar" onClick={(e) => { e.preventDefault(); setShowCancelModal(true) }}>
                         Cancelar
                     </button>
-
                     <button className="imovel-btn-salvar" onClick={(e) => { e.preventDefault(); handleSubmit() }}>
                         Salvar Alterações
                     </button>
@@ -361,7 +410,6 @@ export default function ImovelEdit() {
 
                 {/* CARD — ZONA DE PERIGO */}
                 <div className="imovel-danger-zone">
-
                     <div className="imovel-danger-content">
                         <div>
                             <h3>Excluir anúncio <FaTrash /></h3>
@@ -370,7 +418,6 @@ export default function ImovelEdit() {
                                 suas imagens do sistema!
                             </p>
                         </div>
-
                         <button className="imovel-btn-delete" onClick={() => setShowDeleteModal(true)}>
                             Excluir anúncio
                         </button>
@@ -386,8 +433,7 @@ export default function ImovelEdit() {
                                 <button onClick={() => setShowDeleteModal(false)}>
                                     Cancelar
                                 </button>
-
-                                <button className="modal-delete-btn" onClick={() => { handleDelete(); setShowDeleteModal(false) }} >
+                                <button className="modal-delete-btn" onClick={() => { handleDelete(); setShowDeleteModal(false) }}>
                                     Excluir
                                 </button>
                             </div>
@@ -395,9 +441,7 @@ export default function ImovelEdit() {
                     </div>
                 )}
 
-
             </div>
         </div>
-
     )
 }

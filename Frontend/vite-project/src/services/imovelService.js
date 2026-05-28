@@ -8,3 +8,13 @@ export const createImovel = (imovelData, token) => api.post("imoveis", imovelDat
         Authorization: `Bearer ${token}`
     }
 })
+export const updateImovel = (id, imovelData, token) => api.put(`/imoveis/${id}`, imovelData, {
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+})
+export const deleteImovel = (id, token) => api.delete(`/imoveis/${id}`, {
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+})

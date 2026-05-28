@@ -72,7 +72,7 @@ export default function Footer() {
                             onClick={() => copiarTexto(admData.email_usuario)}
                         >
                             <FaEnvelope />
-                            <p>{admData.email_usuario}</p>
+                            <p>E-mail</p>
                         </div>
 
                     </div>
