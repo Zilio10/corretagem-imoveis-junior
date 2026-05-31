@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom"
 import { FaSearch, FaTimes, FaFilter } from 'react-icons/fa'
 import "../../styles/components/SearchBar.css"
 
-import { getCidades } from '../../services/imovelService'
+import { getCidades, getBairrosByCidade } from '../../services/imovelService'
 
 
 export default function SearchBar() {
     const navigate = useNavigate()
 
     const [cidades, setCidades] = useState([])
+    const [bairros, setBairros] = useState([])
 
     const [aberto, setAberto] = useState(false)
 
@@ -18,6 +19,7 @@ export default function SearchBar() {
         finalidade: '',
         estagio: '',
         cidade: '',
+        bairro: '',
         precoMin: 0,
         precoMax: 50000000,
         qtdQuartos: '',
@@ -73,6 +75,21 @@ export default function SearchBar() {
                 title: 'IMÓVEIS FILTRADOS'
             }
         })
+    }
+
+    async function handleCidadeChange(cidade) {
+        if (!cidade) {
+            setBairros([])
+        } else {
+            try {
+            const res = await getBairrosByCidade(cidade)
+            if (res.data.Sucesso) {
+                setBairros(res.data.Bairros)
+            }
+        } catch (err) {
+            console.log(err)
+        }
+        }
     }
 
     if (aberto) {
@@ -131,7 +148,10 @@ export default function SearchBar() {
 
                     <div className="form-group">
                         <label>Cidade</label>
-                        <select name="cidade" onChange={handleChange} className='form-inform'>
+                        <select name="cidade" onChange={(e) => {
+                            handleChange(e)
+                            handleCidadeChange(e.target.value)
+                        }} className='form-inform'>
                             <option value="">Todas</option>
 
                             {cidades.map((cidade, index) => (
@@ -139,12 +159,27 @@ export default function SearchBar() {
                                     {cidade.cidade_imovel}
                                 </option>
                             ))}
+
                         </select>
                     </div>
 
                     <div className="form-group">
                         <label>ID do imóvel</label>
                         <input type="text" name="id" placeholder="Digite o ID" onChange={handleChange} className='form-inform' />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Bairro</label>
+                        <select name="bairro" onChange={handleChange} className='form-inform'>
+                            <option value="">Todos</option>
+
+                            {bairros.map((bairro, index) => (
+                                <option key={index} value={bairro.bairro_imovel}>
+                                    {bairro.bairro_imovel}
+                                </option>
+                            ))}
+
+                        </select>
                     </div>
 
                     <div className="form-group form-group--full">

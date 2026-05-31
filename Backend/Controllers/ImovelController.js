@@ -73,6 +73,17 @@ class ImovelController {
         }
     }
 
+    async GetBairrosByCidade(req, res) {
+        try {
+            const cidade = req.params.cidade
+            const bairros = await ImovelRepository.getBairrosByCidade(cidade)
+
+            res.status(200).json({ Sucesso: true, Bairros: bairros })
+        } catch (err) {
+            res.status(500).json({ Sucesso: false, Erro: err.message })
+        }
+    }
+
     async Update(req, res) {
         try {
             const id = parseInt(req.params.id)

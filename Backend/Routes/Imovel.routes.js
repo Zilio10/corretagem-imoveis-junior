@@ -14,5 +14,6 @@ router.delete('/:id', authMiddleware, ImovelController.Delete)
 router.get('/', ImovelController.GetAll)
 router.get('/filter', ImovelController.GetAllFiltered)
 router.get('/cidades', ImovelController.GetCidades)
+router.get('/bairros/:cidade', ImovelController.GetBairrosByCidade)
 
 module.exports = router

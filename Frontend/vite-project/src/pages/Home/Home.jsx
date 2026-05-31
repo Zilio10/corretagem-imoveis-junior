@@ -12,6 +12,8 @@ export default function Home() {
   const [offset, setOffset] = useState(0)
   const [loading, setLoading] = useState(true)
 
+  const [userToken, setUserToken] = useState(null)
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -66,7 +68,9 @@ export default function Home() {
           />
         </div>
       ) : (
-        <p>Nenhum imóvel encontrado.</p>
+        <div className="imovel-notFound">
+            <p>🏠Nenhum imóvel foi encontrado</p>
+        </div>
       )}
     </main>
   )

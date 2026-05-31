@@ -24,8 +24,6 @@ export default function ImovelAdd() {
     const [cep, setCep] = useState("") // CEP
     const [city, setCity] = useState("") // Cidade
     const [neighborhood, setNeighborhood] = useState("") // Bairro
-    const [street, setStreet] = useState("") // Rua
-    const [number, setNumber] = useState("") // Número
     const [adress, setAddress] = useState("") // Endereço completo
     const [area, setArea] = useState("") // Área
     const [areaUnit, setAreaUnit] = useState("m²") // Unidade da área (m², he, alq)
@@ -134,7 +132,6 @@ export default function ImovelAdd() {
 
             setCity(res.data.localidade)
             setNeighborhood(res.data.bairro)
-            setStreet(res.data.logradouro)
 
         } catch (err) {
             console.log(err)
@@ -150,12 +147,8 @@ export default function ImovelAdd() {
     }
 
     const buildAdress = () => {
-        if (city && neighborhood && street) {
-            if (number) {
-                setAddress(`${street}, ${number} - ${neighborhood}, ${city}`)
-            } else {
-                setAddress(`${street} - ${neighborhood}, ${city} -> (Número não informado) `)
-            }
+        if (city && neighborhood) {
+            setAddress(`${city} - ${neighborhood}`)
         }
     }
 
@@ -169,7 +162,6 @@ export default function ImovelAdd() {
             { valor: status, nome: "Status" },
             { valor: city, nome: "Cidade" },
             { valor: neighborhood, nome: "Bairro" },
-            { valor: street, nome: "Logradouro" },
             { valor: area, nome: "Área" },
         ]
 
@@ -237,7 +229,7 @@ export default function ImovelAdd() {
 
     useEffect(() => {
         buildAdress()
-    }, [city, neighborhood, street, number])
+    }, [city, neighborhood])
 
     return (
         <div className="imovel-add-page">
@@ -335,16 +327,8 @@ export default function ImovelAdd() {
                             <label>Bairro <span className="imovel-required">obrigatório</span></label>
                             <input type="text" placeholder="Ex: Centro" required value={neighborhood} onChange={(e) => { setNeighborhood(e.target.value) }} />
                         </div>
-                        <div className="imovel-field imovel-street-field">
-                            <label>Logradouro <span className="imovel-required">obrigatório</span></label>
-                            <input type="text" placeholder="Ex: Rua das Flores" required value={street} onChange={(e) => { setStreet(e.target.value) }} />
-                        </div>
-                        <div className="imovel-field imovel-number-field">
-                            <label>Número</label>
-                            <input type="number" min="0" placeholder="Ex: 123" value={number} onChange={(e) => { setNumber(e.target.value) }} />
-                        </div>
                         <div className="imovel-field imovel-address-field">
-                            <label>Endereço completo</label>
+                            <label>Endereço</label>
                             <input type="text" placeholder="Ex: Rua das Flores, 123 - Centro, São Paulo - SP" value={adress} onChange={(e) => { setAddress(e.target.value) }} />
                         </div>
                     </div>

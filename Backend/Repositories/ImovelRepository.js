@@ -60,6 +60,10 @@ class ImovelRepository{
             sql += ' AND cidade_imovel = ?'
             params.push(filtros.cidade)
         }
+        if (filtros.bairro) {
+            sql += ' AND bairro_imovel = ?'
+            params.push(filtros.bairro)
+        }
         if (filtros.precoMin) {
             sql += ' AND preco_imovel >= ?'
             params.push(Number(filtros.precoMin))
@@ -84,9 +88,17 @@ class ImovelRepository{
     }
  
     async GetCidades() {
-        const sql = 'SELECT DISTINCT cidade_imovel FROM Imoveis'
+        const sql = 'SELECT DISTINCT cidade_imovel FROM Imoveis ORDER BY cidade_imovel ASC'
 
         const [rows] = await DB.execute(sql)
+        return rows
+    }
+
+    async getBairrosByCidade(cidade) {
+        const sql = 'SELECT DISTINCT bairro_imovel FROM Imoveis WHERE cidade_imovel = ? ORDER BY bairro_imovel ASC'
+        const params = [cidade]
+
+        const [rows] = await DB.execute(sql, params)
         return rows
     }
 

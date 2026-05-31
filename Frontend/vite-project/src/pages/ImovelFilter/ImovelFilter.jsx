@@ -77,8 +77,11 @@ export default function ImovelFilter() {
                         setOffset={setOffset}
                     />
                 </div>
-            ) : (
-                <p>Nenhum imóvel encontrado.</p>
+                ) : (
+                        
+                <div className="imovel-notFound">
+                    <p>🏠Nenhum imóvel foi encontado</p>
+                </div>
             )}
         </main>
     )
