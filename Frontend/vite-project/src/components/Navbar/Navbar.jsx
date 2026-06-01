@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 
 import "../../styles/components/Navbar.css"
-import logoJunior from "../../assets/images/logo-junior-navbar.png"
+import logoJunior from "../../assets/images/logo.png"
 import { FaRightFromBracket } from "react-icons/fa6"
 
 import ImovelFilter from "../../pages/ImovelFilter/ImovelFilter"

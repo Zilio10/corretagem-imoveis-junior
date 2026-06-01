@@ -4,6 +4,9 @@ import Pagination from "../../components/Pagination/Pagination"
 import { useEffect, useState } from "react"
 import { getAllImoveis } from "../../services/imovelService"
 import { getByPosicao } from "../../services/imagemService"
+import img1 from "../../assets/images/img1.png"
+
+import "../../styles/pages/Home.css"
 
 const LIMIT = 12
 
@@ -50,6 +53,12 @@ export default function Home() {
 
   return (
     <main style={{ paddingTop: "10px" }}>
+
+
+      <div className="img-home">
+        <img src={img1} alt="Imagem de destaque" />
+      </div>
+
       <SearchBar />
 
       {loading ? (

@@ -98,7 +98,7 @@ export default function SearchBar() {
 
                 <button className="searchbar-trigger" onClick={() => setAberto(!aberto)}>
                     <FaSearch />
-                    <span>Pesquisar</span>
+                    <span>Buscar Imóvel</span>
                 </button>
 
                 <div className="searchbar-overlay" onClick={() => setAberto(false)} />
@@ -216,7 +216,7 @@ export default function SearchBar() {
         <div className="searchbar-container" ref={formRef}>
             <button className="searchbar-trigger" onClick={() => setAberto(!aberto)}>
                 <FaSearch />
-                <span>Pesquisar</span>
+                <span>Buscar Imóvel</span>
             </button>
         </div>
     )

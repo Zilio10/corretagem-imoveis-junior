@@ -2,8 +2,9 @@ export function logout() {
 
     localStorage.clear()
 
-    window.location.href = '/'
+    alert('Sessão expirada. Faça login novamente.')
 
+    window.location.href = '/login'
 }
 
 export function userPayload(token) {
@@ -64,6 +65,7 @@ export function isAuthenticated() {
     if (tokenExpirado(token)) {
 
         logout()
+        
         return false
 
     }

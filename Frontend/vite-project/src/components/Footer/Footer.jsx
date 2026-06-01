@@ -1,7 +1,7 @@
 import { FaInstagram, FaPhone, FaWhatsapp, FaEnvelope } from 'react-icons/fa'
 
 import "../../styles/components/Footer.css"
-import logoJunior from "../../assets/images/logo-junior-navbar.png"
+import logoJunior from "../../assets/images/logo.png"
 import { useEffect, useState } from 'react'
 
 import { getDataAdm } from '../../services/usuarioService'
