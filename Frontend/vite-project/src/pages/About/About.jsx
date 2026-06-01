@@ -39,7 +39,7 @@ export default function About() {
                 </div>
                 <div className="about__hero-img-wrap">
                     <img src={img3} alt="Foto do corretor Júnior" className="about__hero-img" />
-                    <div className="about__hero-badge">CRECI Ativo</div>
+                    <div className="about__hero-badge">CRECI ativo - 257947</div>
                 </div>
             </section>
 
@@ -48,7 +48,7 @@ export default function About() {
                 <div className="about__bio-inner">
                     <h2 className="about__section-title">Quem é o Júnior?</h2>
                     <p>
-                        José Antônio Silva — popularmente conhecido como Júnior — construiu sua
+                        José Antônio da Silva — popularmente conhecido como Júnior — construiu sua
                         carreira no mercado imobiliário com um princípio simples: <strong>ouvir antes
                             de oferecer</strong>. Cada cliente tem uma história, um orçamento e um sonho
                         únicos, e é exatamente isso que guia cada negociação.
