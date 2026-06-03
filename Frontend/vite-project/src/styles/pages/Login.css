@@ -37,7 +37,7 @@
 .form-title h3 {
     font-size: 24px;
     font-weight: 800;
-    color: rgba(37, 38, 110, 0.699);
+    color: #1a3c5e;
 }
 
 .form-title p {
@@ -91,7 +91,7 @@
 
 .form-btn {
     width: 100%;
-    background: rgba(37, 38, 110, 0.699);
+    background: #1a3c5e;
     color: #ffffff;
     border: none;
     border-radius: 8px;
@@ -103,7 +103,7 @@
 }
 
 .form-btn:hover {
-    background: rgb(69, 71, 165);
+    background: #0d2d47;
     transform: scale(1.02);
 }
 

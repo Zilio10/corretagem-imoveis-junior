@@ -1,6 +1,7 @@
 body {
   font-family: "Poppins", sans-serif;
   margin: 0;
+  background-color: #f4f6f8;
 }
 
 html, body, #root {
@@ -44,7 +45,7 @@ html {
   height: 38px;
 
   border: 3px solid #e5e7eb;
-  border-top-color: rgba(37, 38, 110, 0.699);
+  border-top-color: #1a3c5e;
 
   border-radius: 50%;
 

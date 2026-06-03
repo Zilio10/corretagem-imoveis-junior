@@ -7,6 +7,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 24px auto;
 }
 
 /* ========================= */
@@ -18,66 +19,75 @@
     align-items: center;
     gap: 8px;
 
-    padding: 6px 16px;
+    padding: 12px 28px;
 
     border: none;
-    border-radius: 20px;
-    background: #f5f5f5;
+    border-radius: 30px;
+    background: #1a3c5e;
     cursor: pointer;
 
     font-size: 15px;
-    font-weight: 500;
-    color: #333;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.04em;
 
-    transition: transform 0.3s ease, background 0.3s ease, filter 0.3s ease;
+    box-shadow: 0 4px 18px rgba(26, 60, 94, 0.35);
+
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .searchbar-trigger:hover {
-    background: #eaeaea;
-    transform: scale(1.05);
-    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+    background: #2a5c8e;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26, 60, 94, 0.45);
 }
 
 .searchbar-trigger svg {
-    width: 16px;
-    height: 16px;
-    fill: #333;
+    width: 17px;
+    height: 17px;
+    fill: #fff;
 }
 
 /* ========================= */
-/* FORM */
+/* FORM — centralizado na tela em todos os breakpoints */
 /* ========================= */
 
 .searchbar-form {
-    position: absolute;
-    top: calc(100% + 12px);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 999;
 
     background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 12px 48px rgba(26, 60, 94, 0.22);
+    padding: 28px;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
-    width: 480px;
+    width: 520px;
+    max-width: calc(100vw - 32px);
 
-    max-height: 85vh;
+    /* scroll interno confiável */
+    max-height: 80vh;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
 
-    animation: fadeDown 0.3s ease;
+    border-top: 3px solid #1a3c5e;
+
+    animation: formOpen 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
 }
 
-@keyframes fadeDown {
+@keyframes formOpen {
     from {
         opacity: 0;
-        transform: translateY(-8px);
+        transform: translate(-50%, -48%) scale(0.97);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate(-50%, -50%) scale(1);
     }
 }
 
@@ -90,29 +100,34 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e0e8f0;
 }
 
 .searchbar-form__header span {
     font-size: 15px;
-    font-weight: 600;
-    color: #333;
+    font-weight: 700;
+    color: #1a3c5e;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
 }
 
 .searchbar-close {
     background: none;
     border: none;
     cursor: pointer;
-    color: #333;
+    color: #6b7280;
     padding: 4px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.3s ease, transform 0.3s ease;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .searchbar-close:hover {
-    background: #f5f5f5;
+    background: #eef2f7;
+    color: #1a3c5e;
     transform: scale(1.1);
 }
 
@@ -136,32 +151,35 @@
 }
 
 .form-group label {
-    font-size: 13px;
-    font-weight: 500;
-    color: #333;
+    font-size: 12px;
+    font-weight: 600;
+    color: #1a3c5e;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
 
 .form-group input,
 .form-group select {
-    padding: 8px 12px;
-    border: 1px solid #e0e0e0;
+    padding: 10px 14px;
+    border: 1.5px solid #e0e8f0;
     border-radius: 10px;
     font-size: 14px;
-    color: #333;
-    background: #f5f5f5;
+    color: #2c2c2c;
+    background: #f4f6f8;
     outline: none;
-    transition: border 0.3s ease, background 0.3s ease;
+    transition: border 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
 
 .form-group input:focus,
 .form-group select:focus {
-    border-color: #aaa;
+    border-color: #1a3c5e;
     background: #fff;
+    box-shadow: 0 0 0 3px rgba(26, 60, 94, 0.1);
 }
 
 .form-group input[type="range"] {
     padding: 0;
-    accent-color: rgba(37, 38, 110, 0.699);
+    accent-color: #1a3c5e;
     cursor: pointer;
 }
 
@@ -172,22 +190,24 @@
 .searchbar-submit {
     grid-column: 1 / -1;
 
-    padding: 10px;
+    padding: 12px;
     border: none;
     border-radius: 10px;
-    background: rgba(37, 38, 110, 0.699);
+    background: #1a3c5e;
     color: #fff;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.05em;
     cursor: pointer;
 
-    transition: transform 0.3s ease, filter 0.3s ease, background 0.3s ease;
+    transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 4px 14px rgba(26, 60, 94, 0.3);
 }
 
 .searchbar-submit:hover {
-    background: rgb(69, 71, 165);
-    transform: scale(1.02);
-    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+    background: #2a5c8e;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(26, 60, 94, 0.4);
 }
 
 .form-inform:hover {
@@ -196,30 +216,16 @@
 }
 
 /* ========================= */
-/* RESPONSIVO */
+/* RESPONSIVO — TABLET */
 /* ========================= */
 
 @media (max-width: 768px) {
     .searchbar-form {
-        position: fixed;
-
-        top: 80px;
-        left: 50%;
-
         width: 88vw;
         max-width: 420px;
-
-        transform: translateX(-50%);
-
         grid-template-columns: 1fr;
-
-        max-height: 85vh;
-
         padding: 16px;
         gap: 12px;
-        margin-top: 10px;
-
-        animation: fadeDownMobile 0.25s ease;
     }
 
     .form-group--full {
@@ -231,28 +237,17 @@
     }
 }
 
-@keyframes fadeDownMobile {
-    from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(-8px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-}
+/* ========================= */
+/* RESPONSIVO — MOBILE */
+/* ========================= */
 
 @media (max-width: 480px) {
     .searchbar-form {
-        width: 86vw;
+        width: 92vw;
         max-width: 360px;
-
-        max-height: 80vh;
-
+        max-height: 75vh;
         padding: 14px;
         gap: 10px;
-        margin-top: 10px;
     }
 
     .searchbar-trigger span {
@@ -260,10 +255,11 @@
     }
 
     .searchbar-trigger {
-        width: 32px;
-        height: 32px;
+        width: 44px;
+        height: 44px;
         padding: 0;
         justify-content: center;
+        border-radius: 50%;
     }
 
     .form-group input,
@@ -279,7 +275,7 @@
 }
 
 /* ========================= */
-/* OVERLAY */
+/* OVERLAY — bloqueia scroll da página */
 /* ========================= */
 
 .searchbar-overlay {
@@ -288,8 +284,12 @@
     z-index: 998;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
-    background: rgba(0, 0, 0, 0.15);
-    animation: fadeIn 0.6s ease;
+    background: rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.3s ease;
+
+    /* impede que o toque/scroll passe para a página atrás */
+    touch-action: none;
+    overflow: hidden;
 }
 
 @keyframes fadeIn {

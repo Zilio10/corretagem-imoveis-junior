@@ -3,10 +3,16 @@ import "../../styles/pages/About.css"
 import { getDataAdm } from '../../services/usuarioService'
 import { useEffect, useState } from 'react'
 import { FaWhatsapp } from 'react-icons/fa'
+import { useScrollReveal } from '../../hooks/useScrollReveal'
 
 export default function About() {
 
     const [admNumber, setAdmNumber] = useState('5512999999999')
+
+    const bioRef       = useScrollReveal()
+    const highlightRef = useScrollReveal()
+    const swotRef      = useScrollReveal()
+    const ctaRef       = useScrollReveal()
 
     useEffect(() => {
         async function getAdmNum() {
@@ -25,7 +31,7 @@ export default function About() {
     return (
         <main className="about">
 
-            {/* ── HERO ── */}
+            {/* ── HERO — animações de drop mantidas no CSS ── */}
             <section className="about__hero">
                 <div className="about__hero-text">
                     <span className="about__eyebrow">Conheça o corretor</span>
@@ -44,7 +50,7 @@ export default function About() {
             </section>
 
             {/* ── SOBRE ── */}
-            <section className="about__bio">
+            <section className="about__bio reveal-fade-up" ref={bioRef}>
                 <div className="about__bio-inner">
                     <h2 className="about__section-title">Quem é o Júnior?</h2>
                     <p>
@@ -61,7 +67,7 @@ export default function About() {
             </section>
 
             {/* ── DIFERENCIAIS ── */}
-            <section className="about__highlights">
+            <section className="about__highlights reveal-fade-up" ref={highlightRef}>
                 <div className="about__highlight-card">
                     <span className="about__highlight-num">10+</span>
                     <span className="about__highlight-label">Anos de experiência</span>
@@ -77,7 +83,7 @@ export default function About() {
             </section>
 
             {/* ── SWOT ── */}
-            <section className="about__swot">
+            <section className="about__swot reveal-fade-up" ref={swotRef}>
                 <h2 className="about__section-title about__section-title--center">
                     Por que escolher o meu trabalho?
                 </h2>
@@ -111,11 +117,11 @@ export default function About() {
             </section>
 
             {/* ── CTA ── */}
-            <section className="about__cta">
+            <section className="about__cta reveal-fade-up" ref={ctaRef}>
                 <h2>Pronto para encontrar seu imóvel?</h2>
                 <p>Entre em contato comigo e dê o primeiro passo.</p>
                 <a href={`https://wa.me/${admNumber}`} className="about__cta-btn" target="_blank" rel="noreferrer">
-                     <FaWhatsapp /> <span>Falar no WhatsApp</span>
+                    <FaWhatsapp /> <span>Falar no WhatsApp</span>
                 </a>
             </section>
 

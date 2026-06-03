@@ -1,6 +1,6 @@
 /* ===== Base & Variables ===== */
 .iv-page {
-    --iv-primary: rgba(37, 38, 110, 0.699);
+    --iv-primary: #1a3c5e;
     --iv-primary-light: rgba(37, 38, 110, 0.08);
 
     --iv-accent: #e8a020;

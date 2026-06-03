@@ -49,7 +49,7 @@
 }
 
 .pagination-list li button:hover:not(:disabled) {
-    background: #eaeaea;
+    background: #0d2d47;
     transform: scale(1.05);
     filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
 }
@@ -62,7 +62,7 @@
 }
 
 .pagination-list li button.active {
-    background: rgba(37, 38, 110, 0.699);
+    background: #1a3c5e;
     border-color: transparent;
     color: #fff;
     font-weight: 600;

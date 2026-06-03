@@ -210,7 +210,7 @@ body {
   width: calc(100% - 40px);
   margin: 50px auto;
 
-  animation: fadeUp 0.7s ease both;
+
   animation-delay: 0.3s;
 }
 
@@ -247,7 +247,6 @@ body {
   gap: 0.4rem;
   min-width: 160px;
 
-  animation: fadeUp 0.6s ease both;
 }
 
 .about__highlight-card:nth-child(1) {
@@ -305,8 +304,6 @@ body {
   color: #fff;
   position: relative;
   overflow: hidden;
-
-  animation: fadeUp 0.6s ease both;
 }
 
 .about__swot-card:nth-child(1) { animation-delay: 0.1s; }
@@ -380,7 +377,6 @@ body {
   padding: 4rem 2rem;
   margin-top: 20px;
 
-  animation: fadeUp 0.7s ease both;
   animation-delay: 0.2s;
 }
 
@@ -418,6 +414,18 @@ body {
 .about__cta-btn:hover {
   background: var(--about-accent-dark);
   transform: translateY(-2px);
+}
+
+.reveal-fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* quando o IntersectionObserver adiciona .revealed */
+.reveal-fade-up.revealed {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ============================

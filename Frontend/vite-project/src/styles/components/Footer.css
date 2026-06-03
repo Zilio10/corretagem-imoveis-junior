@@ -1,5 +1,5 @@
 footer {
-  background: rgba(37, 38, 110, 0.699);
+  background: #1a3c5e;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 
@@ -12,8 +12,13 @@ footer {
   align-items: center;
   gap: 20px;
 
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(0, 0, 0, 0.26);
   
+}
+
+footer img {
+  filter: brightness(0) invert(1);
+  opacity: 0.88;
 }
 
 /* TOPO: LOGO + CONTEÚDO */

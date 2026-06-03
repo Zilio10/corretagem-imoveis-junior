@@ -29,13 +29,13 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: rgba(37, 38, 110, 0.07);
+    background: #1a3c5e3b;
     border: 1px solid rgba(37, 38, 110, 0.12);
     border-radius: 999px;
     padding: 4px 14px;
     font-size: 12px;
     font-weight: 600;
-    color: rgba(37, 38, 110, 0.65);
+    color: #1a3c5e;
     letter-spacing: 0.04em;
     margin: 0 auto 6px;
 }
@@ -50,7 +50,7 @@
 .imovel-edit-page .imovel-page-header h2 {
     font-size: 26px;
     font-weight: 800;
-    color: rgba(37, 38, 110, 0.85);
+    color: #1a3c5e;
     margin: 0;
 }
 
@@ -75,7 +75,7 @@
 .imovel-edit-page .imovel-card-title {
     font-size: 11px;
     font-weight: 800;
-    color: rgba(37, 38, 110, 0.7);
+    color: #1a3c5e;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     padding-bottom: 12px;
@@ -123,7 +123,7 @@
 .imovel-edit-page .imovel-required {
     font-size: 10px;
     font-weight: 600;
-    color: rgba(37, 38, 110, 0.45);
+    color: #1a3c5e94;
     background: rgba(37, 38, 110, 0.06);
     border-radius: 4px;
     padding: 1px 6px;
@@ -158,7 +158,7 @@
 .imovel-edit-page .imovel-field input:focus,
 .imovel-edit-page .imovel-field select:focus,
 .imovel-edit-page .imovel-field textarea:focus {
-    border-color: rgba(37, 38, 110, 0.45);
+    border-color: #1a3c5e;
     box-shadow: 0 0 0 3px rgba(37, 38, 110, 0.08);
     background: #ffffff;
 }
@@ -250,7 +250,7 @@
     padding: 14px 36px;
     border-radius: 8px;
     border: none;
-    background: rgba(37, 38, 110, 0.699);
+    background: #1a3c5e;
     color: #ffffff;
     font-size: 15px;
     font-weight: 700;
@@ -260,7 +260,7 @@
 }
 
 .imovel-edit-page .imovel-btn-salvar:hover {
-    background: rgb(69, 71, 165);
+    background: #0d2d47;
     transform: scale(1.02);
 }
 
@@ -283,7 +283,7 @@
 .swal-title {
     font-size: 20px !important;
     font-weight: 800 !important;
-    color: rgba(37, 38, 110, 0.699) !important;
+    color: #1a3c5e !important;
 }
 
 .swal-text {
@@ -292,7 +292,7 @@
 }
 
 .swal-btn-confirm {
-    background: rgba(37, 38, 110, 0.699) !important;
+    background: #1a3c5e !important;
     color: #ffffff !important;
     border: none !important;
     border-radius: 8px !important;
@@ -304,7 +304,7 @@
 }
 
 .swal-btn-confirm:hover {
-    background: rgb(69, 71, 165) !important;
+    background: #0d2d47 !important;
     transform: scale(1.02) !important;
 }
 
@@ -318,7 +318,7 @@
 
 .swal-popup .swal2-success-line-tip,
 .swal-popup .swal2-success-line-long {
-    background-color: rgba(37, 38, 110, 0.699) !important;
+    background-color: #1a3c5e !important;
 }
 
 /* ===== RESPONSIVO ===== */

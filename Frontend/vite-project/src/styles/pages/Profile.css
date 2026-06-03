@@ -37,7 +37,7 @@
 .profile-title h3 {
     font-size: 24px;
     font-weight: 800;
-    color: rgba(37, 38, 110, 0.699);
+    color: #1a3c5e;
 }
 
 .profile-title p {
@@ -111,7 +111,7 @@
 .profile-fields button[type="submit"] {
     margin-top: 8px;
     width: 100%;
-    background: rgba(37, 38, 110, 0.699);
+    background: #1a3c5e;
     color: #ffffff;
     border: none;
     border-radius: 8px;
@@ -123,7 +123,7 @@
 }
 
 .profile-fields button[type="submit"]:hover {
-    background: rgb(69, 71, 165);
+    background: #0d2d47 ;
     transform: scale(1.02);
 }
 
@@ -208,7 +208,7 @@
 .swal-title {
     font-size: 20px !important;
     font-weight: 800 !important;
-    color: rgba(37, 38, 110, 0.699) !important;
+    color: #1a3c5e !important;
 }
 
 .swal-text {
@@ -217,7 +217,7 @@
 }
 
 .swal-btn-confirm {
-    background: rgba(37, 38, 110, 0.699) !important;
+    background: #1a3c5e !important;
     color: #ffffff !important;
     border: none !important;
     border-radius: 8px !important;
@@ -229,7 +229,7 @@
 }
 
 .swal-btn-confirm:hover {
-    background: rgb(69, 71, 165) !important;
+    background: #0d2d47  !important;
     transform: scale(1.02) !important;
 }
 
@@ -244,7 +244,7 @@
 
 .swal-popup .swal2-success-line-tip,
 .swal-popup .swal2-success-line-long {
-    background-color: rgba(37, 38, 110, 0.699) !important;
+    background-color: #1a3c5e !important;
 }
 
 /* mobile */
