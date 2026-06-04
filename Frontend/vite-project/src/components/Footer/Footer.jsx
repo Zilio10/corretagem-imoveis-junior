@@ -108,7 +108,7 @@ export default function Footer() {
             </div>
 
             <p className="footer__copy">
-                <span>Júnior Corretor - Todos os direitos reservados.</span> &copy; 2026
+                <span>Júnior Silva Corretor - Todos os direitos reservados.</span> &copy; 2026
             </p>
 
         </footer>
