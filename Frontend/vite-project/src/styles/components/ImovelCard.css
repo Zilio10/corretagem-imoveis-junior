@@ -174,3 +174,26 @@
     transform: scale(1.1);
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
 }
+
+@media (max-width: 600px) {
+    .imovel-card {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .card-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+
+    .card-details {
+        gap: 20px;
+    }
+
+    .card-price {
+        font-size: 16px;
+    }
+}
