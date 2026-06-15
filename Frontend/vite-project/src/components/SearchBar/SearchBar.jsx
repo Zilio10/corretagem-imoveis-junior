@@ -123,6 +123,7 @@ export default function SearchBar() {
                             <option value="Apartamento">Apartamento</option>
                             <option value="Terreno">Terreno</option>
                             <option value="Fazenda">Fazenda</option>
+                            <option value="Galpao">Galpão</option>
                         </select>
                     </div>
 

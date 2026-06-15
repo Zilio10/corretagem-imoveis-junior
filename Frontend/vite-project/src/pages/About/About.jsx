@@ -45,7 +45,7 @@ export default function About() {
                 </div>
                 <div className="about__hero-img-wrap">
                     <img src={img3} alt="Foto do corretor Júnior" className="about__hero-img" />
-                    <div className="about__hero-badge">CRECI ativo - 257947</div>
+                    <div className="about__hero-badge">CRECI - 257947</div>
                 </div>
             </section>
 
