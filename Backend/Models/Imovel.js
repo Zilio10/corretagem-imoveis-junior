@@ -5,6 +5,7 @@ class Imovel {
         this._descricaoImovel = imovelObj.descricao
         this._precoImovel = imovelObj.preco
         this._tipoImovel = imovelObj.tipo
+        this._usoImovel = imovelObj.usoImovel
         this._finalidadeImovel = imovelObj.finalidade
         this._estagioImovel = imovelObj.estagio
         this._statusImovel = imovelObj.status
@@ -17,6 +18,7 @@ class Imovel {
         this._qtdSuitesImovel = imovelObj.qtdSuites
         this._qtdBanheirosImovel = imovelObj.qtdBanheiros
         this._qtdVagasImovel = imovelObj.qtdVagas
+        this._linkInstagramImovel = imovelObj.linkInstagram
         this._dataCriacaoImovel = imovelObj.dataCriacao
     }
 

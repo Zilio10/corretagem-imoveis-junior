@@ -37,6 +37,9 @@ CREATE TABLE Imoveis(
     data_criacao_imovel DATETIME
 );
 
+ALTER TABLE Imoveis ADD COLUMN uso_imovel VARCHAR (50) NULL;
+ALTER TABLE Imoveis ADD COLUMN link_instagram_imovel VARCHAR (255) NULL;
+
 CREATE TABLE Imagens_Imoveis(
 	id_imagem INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     endereco_imagem VARCHAR(500) NOT NULL,

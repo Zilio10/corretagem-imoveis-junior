@@ -65,6 +65,7 @@ export default function Navbar() {
   const navLinks = [
     { label: "Aluguel", href: "/imovelFilter", state: { finalidade: "Aluguel" } },
     { label: "Venda", href: "/imovelFilter", state: { finalidade: "Venda" } },
+    { label: "Áreas Comerciais", href: "/imovelFilter", state: { usoImovel: "Comercial" } },
     { label: "Sobre", href: "/about" },
     { label: "Contato", href: "#footer__contato", ancora: true }
   ]
@@ -87,6 +88,7 @@ export default function Navbar() {
 
             if (link.label === "Aluguel") title = "IMÓVEIS ALUGANDO"
             if (link.label === "Venda") title = "IMÓVEIS VENDENDO"
+            if (link.label === "Áreas Comerciais") title = "ÁREAS COMERCIAIS"
 
             return (
               <li key={link.href + i}>

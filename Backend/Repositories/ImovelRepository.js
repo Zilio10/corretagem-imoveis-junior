@@ -1,15 +1,16 @@
 const { param } = require('../Routes/Imovel.routes')
 const DB = require('../server')
 
-class ImovelRepository{
+class ImovelRepository {
 
     async Create(imovelObj) {
-        const sql = 'INSERT INTO Imoveis (titulo_imovel,descricao_imovel,preco_imovel,tipo_imovel,finalidade_imovel,estagio_imovel,status_imovel,cep_imovel,cidade_imovel,bairro_imovel,endereco_imovel,area_imovel,qtd_quartos_imovel,qtd_suites_imovel,qtd_banheiros_imovel,qtd_vagas_imovel,data_criacao_imovel) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
+        const sql = 'INSERT INTO Imoveis (titulo_imovel,descricao_imovel,preco_imovel,tipo_imovel,uso_imovel,finalidade_imovel,estagio_imovel,status_imovel,cep_imovel,cidade_imovel,bairro_imovel,endereco_imovel,area_imovel,qtd_quartos_imovel,qtd_suites_imovel,qtd_banheiros_imovel,qtd_vagas_imovel,link_instagram_imovel,data_criacao_imovel) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
         const params = [
             imovelObj._tituloImovel,
             imovelObj._descricaoImovel,
             imovelObj._precoImovel,
             imovelObj._tipoImovel,
+            imovelObj._usoImovel,
             imovelObj._finalidadeImovel,
             imovelObj._estagioImovel,
             imovelObj._statusImovel,
@@ -22,6 +23,7 @@ class ImovelRepository{
             imovelObj._qtdSuitesImovel,
             imovelObj._qtdBanheirosImovel,
             imovelObj._qtdVagasImovel,
+            imovelObj._linkInstagramImovel,
             imovelObj._dataCriacaoImovel
         ]
 
@@ -31,7 +33,7 @@ class ImovelRepository{
 
     async GetAll() {
         const sql = 'SELECT * FROM Imoveis ORDER BY data_criacao_imovel DESC'
-        
+
         const [rows] = await DB.execute(sql)
         return rows
     }
@@ -47,6 +49,10 @@ class ImovelRepository{
         if (filtros.tipo) {
             sql += ' AND tipo_imovel = ?'
             params.push(filtros.tipo)
+        }
+        if (filtros.usoImovel) {
+            sql += ' AND uso_imovel = ?'
+            params.push(filtros.usoImovel)
         }
         if (filtros.finalidade) {
             sql += ' AND finalidade_imovel = ?'
@@ -86,7 +92,7 @@ class ImovelRepository{
         const [rows] = await DB.execute(sql, params)
         return rows
     }
- 
+
     async GetCidades() {
         const sql = 'SELECT DISTINCT cidade_imovel FROM Imoveis ORDER BY cidade_imovel ASC'
 
@@ -103,32 +109,34 @@ class ImovelRepository{
     }
 
     async Update(idImovel, imovelObj) {
-    const sql = `UPDATE Imoveis SET titulo_imovel = ?, descricao_imovel = ?, preco_imovel = ?, tipo_imovel = ?, finalidade_imovel = ?, estagio_imovel = ?, status_imovel = ?, cep_imovel = ?, cidade_imovel = ?, bairro_imovel = ?, endereco_imovel = ?, area_imovel = ?, qtd_quartos_imovel = ?, qtd_suites_imovel = ?, qtd_banheiros_imovel = ?, qtd_vagas_imovel = ? WHERE id_imovel = ?`
+        const sql = `UPDATE Imoveis SET titulo_imovel = ?, descricao_imovel = ?, preco_imovel = ?, tipo_imovel = ?, uso_imovel = ?, finalidade_imovel = ?, estagio_imovel = ?, status_imovel = ?, cep_imovel = ?, cidade_imovel = ?, bairro_imovel = ?, endereco_imovel = ?, area_imovel = ?, qtd_quartos_imovel = ?, qtd_suites_imovel = ?, qtd_banheiros_imovel = ?, qtd_vagas_imovel = ?, link_instagram_imovel = ? WHERE id_imovel = ?`
 
-    const params = [
-        imovelObj._tituloImovel,
-        imovelObj._descricaoImovel,
-        imovelObj._precoImovel,
-        imovelObj._tipoImovel,
-        imovelObj._finalidadeImovel,
-        imovelObj._estagioImovel,
-        imovelObj._statusImovel,
-        imovelObj._cepImovel,
-        imovelObj._cidadeImovel,
-        imovelObj._bairroImovel,
-        imovelObj._enderecoImovel,
-        imovelObj._areaImovel,
-        imovelObj._qtdQuartosImovel,
-        imovelObj._qtdSuitesImovel,
-        imovelObj._qtdBanheirosImovel,
-        imovelObj._qtdVagasImovel,
-        idImovel
-    ]
+        const params = [
+            imovelObj._tituloImovel,
+            imovelObj._descricaoImovel,
+            imovelObj._precoImovel,
+            imovelObj._tipoImovel,
+            imovelObj._usoImovel,
+            imovelObj._finalidadeImovel,
+            imovelObj._estagioImovel,
+            imovelObj._statusImovel,
+            imovelObj._cepImovel,
+            imovelObj._cidadeImovel,
+            imovelObj._bairroImovel,
+            imovelObj._enderecoImovel,
+            imovelObj._areaImovel,
+            imovelObj._qtdQuartosImovel,
+            imovelObj._qtdSuitesImovel,
+            imovelObj._qtdBanheirosImovel,
+            imovelObj._qtdVagasImovel,
+            imovelObj._linkInstagramImovel,
+            idImovel
+        ]
 
-    const [result] = await DB.execute(sql, params)
-    return result.affectedRows 
+        const [result] = await DB.execute(sql, params)
+        return result.affectedRows
     }
-    
+
     async Delete(idImovel) {
         const sql = 'DELETE FROM Imoveis WHERE id_imovel = ?'
         const params = [idImovel]

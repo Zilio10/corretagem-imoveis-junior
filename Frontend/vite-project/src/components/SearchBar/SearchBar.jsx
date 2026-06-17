@@ -128,6 +128,16 @@ export default function SearchBar() {
                     </div>
 
                     <div className="form-group">
+                        <label>Uso do Imóvel</label>
+                        <select name="usoImovel" onChange={handleChange} className='form-inform'>
+                            <option value="">Todos</option>
+                            <option value="Residencial">Residencial</option>
+                            <option value="Comercial">Comercial</option>
+                            <option value="Rural">Rural</option>
+                        </select>
+                    </div>
+
+                    <div className="form-group">
                         <label>Finalidade de contrato</label>
                         <select name="finalidade" onChange={handleChange} className='form-inform'>
                             <option value="">Todas</option>
@@ -165,11 +175,6 @@ export default function SearchBar() {
                     </div>
 
                     <div className="form-group">
-                        <label>ID do imóvel</label>
-                        <input type="text" name="id" placeholder="Digite o ID" onChange={handleChange} className='form-inform' />
-                    </div>
-
-                    <div className="form-group">
                         <label>Bairro</label>
                         <select name="bairro" onChange={handleChange} className='form-inform'>
                             <option value="">Todos</option>
@@ -181,6 +186,11 @@ export default function SearchBar() {
                             ))}
 
                         </select>
+                    </div>
+
+                    <div className="form-group">
+                        <label>ID do imóvel</label>
+                        <input type="text" name="id" placeholder="Digite o ID" onChange={handleChange} className='form-inform' />
                     </div>
 
                     <div className="form-group form-group--full">

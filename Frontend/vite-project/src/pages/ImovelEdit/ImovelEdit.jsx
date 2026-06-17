@@ -22,6 +22,7 @@ export default function ImovelEdit() {
     const [description, setDescription] = useState("")
     const [price, setPrice] = useState("")
     const [type, setType] = useState("")
+    const [areaUse, setAreaUse] = useState("")
     const [finality, setFinality] = useState("")
     const [stage, setStage] = useState("")
     const [status, setStatus] = useState("")
@@ -34,6 +35,7 @@ export default function ImovelEdit() {
     const [suites, setSuites] = useState(0)
     const [bathrooms, setBathrooms] = useState(0)
     const [parkingSpaces, setParkingSpaces] = useState(0)
+    const [linkInstagram, setLinkInstagram] = useState("")
 
     const [showCancelModal, setShowCancelModal] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
@@ -86,6 +88,7 @@ export default function ImovelEdit() {
             descricao: description,
             preco: parseFloat(price.replace(/\./g, "").replace(",", ".")),
             tipo: type,
+            usoImovel: areaUse,
             finalidade: finality,
             estagio: stage,
             status: status,
@@ -98,6 +101,7 @@ export default function ImovelEdit() {
             qtdSuites: suites,
             qtdBanheiros: bathrooms,
             qtdVagas: parkingSpaces,
+            linkInstagram: linkInstagram,
             dataCriacao: imovelData.data_criacao_imovel
         }
 
@@ -130,7 +134,7 @@ export default function ImovelEdit() {
 
             const res2 = await deleteImovel(idImovel, userToken)
             if (res2.data.Sucesso) {
-                
+
                 toaster(true)
                 setTimeout(() => {
                     window.location.href = "/"
@@ -201,6 +205,8 @@ export default function ImovelEdit() {
         setParkingSpaces(imovelData.qtd_vagas_imovel || 0)
         setArea(parseArea(imovelData.area_imovel).value)
         setAreaUnit(parseArea(imovelData.area_imovel).unit)
+        setAreaUse(imovelData.uso_imovel || "")
+        setLinkInstagram(imovelData.link_instagram_imovel || "")
     }, [imovelData])
 
     return (
@@ -277,7 +283,18 @@ export default function ImovelEdit() {
                         </div>
                     </div>
 
-                    <div className="imovel-grid-3">
+                    <div className="imovel-grid-2">
+
+                        <div className="imovel-field">
+                            <label>Uso da Área <span className="imovel-required">obrigatório</span></label>
+                            <select value={areaUse} onChange={(e) => setAreaUse(e.target.value)}>
+                                <option value="">Selecione</option>
+                                <option value="Residencial">Residencial</option>
+                                <option value="Comercial">Comercial</option>
+                                <option value="Rural">Rural</option>
+                            </select>
+                        </div>
+
                         <div className="imovel-field">
                             <label>Finalidade <span className="imovel-required">obrigatório</span></label>
                             <select value={finality} onChange={(e) => setFinality(e.target.value)}>
@@ -382,6 +399,18 @@ export default function ImovelEdit() {
                         <div className="imovel-field">
                             <label>Vagas</label>
                             <input type="number" min="0" placeholder="0" value={parkingSpaces} onChange={(e) => setParkingSpaces(e.target.value)} />
+                        </div>
+                    </div>
+                </div>
+
+                {/* CARD — LINKS */}
+                <div className="imovel-card">
+                    <p className="imovel-card-title">Links</p>
+
+                    <div className="imovel-field">
+                        <label>Link do Instagram</label>
+                        <div className="imovel-ig-link">
+                            <input type="url" value={linkInstagram} onChange={(e) => { setLinkInstagram(e.target.value) }} />
                         </div>
                     </div>
                 </div>

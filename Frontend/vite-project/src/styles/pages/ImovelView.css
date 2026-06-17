@@ -332,7 +332,7 @@
     font-size: 11px;
     font-weight: 800;
 
-    color: rgba(37, 38, 110, 0.7);
+    color: var(--iv-text-muted);
 
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -355,7 +355,7 @@
 
     line-height: 1.8;
 
-    color: #5f6b7a;
+    color: #000000;
 
     margin: 0;
 
@@ -419,6 +419,62 @@
 
 .iv-btn--ghost:hover {
     background: var(--iv-primary-light);
+}
+
+/* ===== Instagram Link ===== */
+.iv-instagram-info {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.iv-instagram-info__label {
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    color: var(--iv-text-muted);
+}
+
+.iv-instagram-link {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color: var(--iv-primary);
+
+    text-decoration: none;
+
+    width: fit-content;
+
+    transition: color 0.2s ease;
+}
+
+.iv-instagram-link:hover {
+    color: #ee2a7b;
+    text-decoration: underline;
+}
+
+.iv-instagram-link__icon {
+    width: 18px;
+    height: 18px;
+}
+
+.iv-instagram-link--empty {
+    color: var(--iv-text-muted);
+
+    font-weight: 500;
+
+    font-style: italic;
+
+    cursor: default;
 }
 
 /* ===== Responsive ===== */

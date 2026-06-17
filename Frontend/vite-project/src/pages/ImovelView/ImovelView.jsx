@@ -4,7 +4,7 @@ import { getAllFiltered } from "../../services/imovelService"
 import { getByImovel } from "../../services/imagemService"
 import { getDataAdm } from "../../services/usuarioService"
 
-import { FaBed, FaBath, FaShower, FaCar, FaWhatsapp } from "react-icons/fa"
+import { FaBed, FaBath, FaShower, FaCar, FaWhatsapp, FaInstagram } from "react-icons/fa"
 
 import Carousel from "../../components/Carousel/Carousel"
 import "../../styles/pages/ImovelView.css"
@@ -92,6 +92,7 @@ export default function ImovelView() {
     const {
         titulo_imovel,
         tipo_imovel,
+        uso_imovel,
         finalidade_imovel,
         estagio_imovel,
         status_imovel,
@@ -102,6 +103,7 @@ export default function ImovelView() {
         qtd_suites_imovel,
         qtd_banheiros_imovel,
         qtd_vagas_imovel,
+        link_instagram_imovel,
         descricao_imovel,
     } = imovelData
 
@@ -124,8 +126,10 @@ export default function ImovelView() {
                     <div className="iv-header__meta">
                         <span className="iv-tag">{tipo_imovel}</span>
                         <span className="iv-tag iv-tag--outline">{finalidade_imovel}</span>
+                        <span className="iv-tag iv-tag--outline">{uso_imovel}</span>
                         <StatusBadge status={status_imovel} />
                     </div>
+
                     <h1 className="iv-title">{titulo_imovel}</h1>
                     <p className="iv-address">
                         <svg className="iv-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -192,6 +196,30 @@ export default function ImovelView() {
                 <div className="iv-description">
                     <h2 className="iv-section-title">Descrição</h2>
                     <p className="iv-description__text">{descricao_imovel}</p>
+                </div>
+
+                {/* Divisória */}
+                <hr className="iv-divider" />
+
+                {/* Instagram */}
+                <div className="iv-instagram-info">
+                    <span className="iv-instagram-info__label">Instagram</span>
+
+                    {link_instagram_imovel ? (
+                        <a
+                            href={link_instagram_imovel}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="iv-instagram-link"
+                        >
+                            <FaInstagram className="iv-instagram-link__icon" />
+                            Ver post no Instagram
+                        </a>
+                    ) : (
+                        <span className="iv-instagram-link iv-instagram-link--empty">
+                            Nenhum post disponível
+                        </span>
+                    )}
                 </div>
 
             </section>

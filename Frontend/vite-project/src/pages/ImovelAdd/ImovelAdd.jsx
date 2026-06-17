@@ -18,6 +18,7 @@ export default function ImovelAdd() {
     const [description, setDescription] = useState("") // Descrição
     const [price, setPrice] = useState("") // Preço
     const [type, setType] = useState("") // Tipo (Casa, Apartamento, Terreno, Fazenda)
+    const [areaUse, setAreaUse] = useState("") // Uso da área (Comercial, Residencial, Rural)
     const [finality, setFinality] = useState("") // Finalidade (Venda, Aluguel, Permuta)
     const [stage, setStage] = useState("")  // Estágio (Concluído, Em construção, Na planta)
     const [status, setStatus] = useState("") // Status (Disponível, Vendido, Alugado)
@@ -31,6 +32,7 @@ export default function ImovelAdd() {
     const [suites, setSuites] = useState(0) // Suítes
     const [bathrooms, setBathrooms] = useState(0) // Banheiros
     const [parkingSpaces, setParkingSpaces] = useState(0) // Vagas de garagem
+    const [instagramLink, setInstagramLink] = useState("") // Link do Instagram
 
     const [showLogoutModal, setShowLogoutModal] = useState(false)
 
@@ -157,6 +159,7 @@ export default function ImovelAdd() {
             { valor: title, nome: "Título" },
             { valor: price, nome: "Preço" },
             { valor: type, nome: "Tipo" },
+            { valor: areaUse, nome: "Uso da Área" },
             { valor: finality, nome: "Finalidade" },
             { valor: stage, nome: "Estágio" },
             { valor: status, nome: "Status" },
@@ -191,6 +194,7 @@ export default function ImovelAdd() {
         formData.append("descricao", description)
         formData.append("preco", price)
         formData.append("tipo", type)
+        formData.append("usoImovel", areaUse)
         formData.append("finalidade", finality)
         formData.append("estagio", stage)
         formData.append("status", status)
@@ -203,6 +207,7 @@ export default function ImovelAdd() {
         formData.append("qtdSuites", Number(suites))
         formData.append("qtdBanheiros", Number(bathrooms))
         formData.append("qtdVagas", Number(parkingSpaces))
+        formData.append("linkInstagram", instagramLink)
         formData.append("dataCriacao", new Date().toISOString().slice(0, 19).replace("T", " "))
 
         imagens.forEach(img => formData.append("imagens", img.file))
@@ -273,7 +278,18 @@ export default function ImovelAdd() {
                         </div>
                     </div>
 
-                    <div className="imovel-grid-3">
+                    <div className="imovel-grid-2">
+
+                        <div className="imovel-field">
+                            <label>Uso da Área <span className="imovel-required">obrigatório</span></label>
+                            <select value={areaUse} onChange={(e) => { setAreaUse(e.target.value) }}>
+                                <option value="">Selecione</option>
+                                <option value="Residencial">Residencial</option>
+                                <option value="Comercial">Comercial</option>
+                                <option value="Rural">Rural</option>
+                            </select>
+                        </div>
+
                         <div className="imovel-field">
                             <label>Finalidade <span className="imovel-required">obrigatório</span></label>
                             <select value={finality} onChange={(e) => { setFinality(e.target.value) }}>
@@ -367,6 +383,18 @@ export default function ImovelAdd() {
                         <div className="imovel-field">
                             <label>Vagas</label>
                             <input type="number" min="0" placeholder="0" required value={parkingSpaces} onChange={(e) => { setParkingSpaces(e.target.value) }} />
+                        </div>
+                    </div>
+                </div>
+
+                {/* CARD — LINKS */}
+                <div className="imovel-card">
+                    <p className="imovel-card-title">Links</p>
+
+                    <div className="imovel-field">
+                        <label>Link do Instagram</label>
+                        <div className="imovel-ig-link">
+                            <input type="url" placeholder="Ex: https://www.instagram.com/seu_post" value={instagramLink} onChange={(e) => { setInstagramLink(e.target.value) }} />
                         </div>
                     </div>
                 </div>
