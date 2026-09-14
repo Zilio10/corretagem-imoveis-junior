@@ -84,8 +84,8 @@ export default function ImovelEdit() {
 
     async function handleSubmit() {
         const imovelObj = {
-            titulo: title,
-            descricao: description,
+            titulo: title.trim(),
+            descricao: description.trim(),
             preco: parseFloat(price.replace(/\./g, "").replace(",", ".")),
             tipo: type,
             usoImovel: areaUse,
@@ -93,15 +93,15 @@ export default function ImovelEdit() {
             estagio: stage,
             status: status,
             cep: imovelData.cep_imovel,
-            cidade: city,
-            bairro: neighborhood,
-            endereco: adress,
+            cidade: city.trim(),
+            bairro: neighborhood.trim(),
+            endereco: adress.trim(),
             area: `${area} ${areaUnit}`,
             qtdQuartos: bedrooms,
             qtdSuites: suites,
             qtdBanheiros: bathrooms,
             qtdVagas: parkingSpaces,
-            linkInstagram: linkInstagram,
+            linkInstagram: linkInstagram.trim(),
             dataCriacao: imovelData.data_criacao_imovel
         }
 

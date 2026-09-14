@@ -94,18 +94,28 @@ class ImovelRepository {
     }
 
     async GetCidades() {
-        const sql = 'SELECT DISTINCT cidade_imovel FROM Imoveis ORDER BY cidade_imovel ASC'
+        const sql = `
+        SELECT DISTINCT TRIM(cidade_imovel) AS cidade_imovel
+        FROM Imoveis
+        ORDER BY TRIM(cidade_imovel) ASC
+    `;
 
-        const [rows] = await DB.execute(sql)
-        return rows
+        const [rows] = await DB.execute(sql);
+        return rows;
     }
 
     async getBairrosByCidade(cidade) {
-        const sql = 'SELECT DISTINCT bairro_imovel FROM Imoveis WHERE cidade_imovel = ? ORDER BY bairro_imovel ASC'
-        const params = [cidade]
+        const sql = `
+        SELECT DISTINCT TRIM(bairro_imovel) AS bairro_imovel
+        FROM Imoveis
+        WHERE TRIM(cidade_imovel) = ?
+        ORDER BY TRIM(bairro_imovel) ASC
+    `;
 
-        const [rows] = await DB.execute(sql, params)
-        return rows
+        const params = [cidade.trim()];
+        const [rows] = await DB.execute(sql, params);
+
+        return rows;
     }
 
     async Update(idImovel, imovelObj) {
